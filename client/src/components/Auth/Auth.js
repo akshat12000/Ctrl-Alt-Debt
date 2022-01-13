@@ -10,7 +10,7 @@ import { AUTH } from '../../constants/actionTypes';
 import useStyles from './styles';
 import Input from './Input';
 
-const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
+const initialState = { name:'', email: '', password: '', confirmPassword: '',year:'' };
 
 
 const Auth = () => {
@@ -57,8 +57,8 @@ const Auth = () => {
                     <Grid container spacing={2}>
                         {isSignup && (
                             <>
-                                <Input name="firstName" label="First Name" handleChange={handleChange} autoFocus half />
-                                <Input name="lastName" label="Last Name" handleChange={handleChange} half />
+                                <Input name="name" label="Name" handleChange={handleChange} autoFocus  />
+                                <Input name="year" label="Year" handleChange={handleChange} autoFocus  />
                             </>
                         )}
                         <Input name="email" label="Email Address" handleChange={handleChange} type="email" />
