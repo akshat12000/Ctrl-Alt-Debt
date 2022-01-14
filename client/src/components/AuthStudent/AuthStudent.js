@@ -26,25 +26,25 @@ const AuthStudent = () => {
     const switchMode = () => {
        
         setIsSignup((prevIsSignup) => !prevIsSignup);
-        // console.log(isSignup);
+    
         setShowPassword(false);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(isSignup)
+       
         if (isSignup) {
-            console.log('signup')
+           
             dispatch(signup(form, history));
         } else {
-            console.log('signin')
+           
             dispatch(signin(form, history));
         }
     };
 
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-    console.log(form)
+
 
     return (
         <Container component="main" maxWidth="xs">

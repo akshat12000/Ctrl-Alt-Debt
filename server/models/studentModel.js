@@ -5,11 +5,10 @@ const studentSchema = mongoose.Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   year: { type: String, required: true },
-  meetings: { type: [String], required: true },
+  meetings: { type: [String] },
   dayCount: {
     type: Number,
     default: 0,
-    required: true,
   },
 });
 

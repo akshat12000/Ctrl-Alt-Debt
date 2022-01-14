@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { useDispatch } from 'react-redux';
 import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
+import { useHistory ,useLocation} from 'react-router-dom';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 import Icon from './icon';
@@ -10,7 +10,7 @@ import { AUTH } from '../../constants/actionTypes';
 import useStyles from './styles';
 import Input from './Input';
 
-const initialState = { name:'', email: '', password: '', confirmPassword: '',year:'' };
+const initialState = { name:'', email: '', password: '', confirmPassword: '',year:'',userType:'' };
 
 
 const AuthVolunteer = () => {
@@ -19,6 +19,14 @@ const AuthVolunteer = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const classes = useStyles();
+    let location = useLocation();
+
+    const userType=location.pathname.split("/auth/")[1];
+    useEffect(() => {
+        setForm({...form,userType:userType});
+    }, [userType]);
+
+    // setForm({...form,userType:userType});
 
     const [showPassword, setShowPassword] = useState(false);
     const handleShowPassword = () => setShowPassword(!showPassword);
@@ -26,13 +34,13 @@ const AuthVolunteer = () => {
     const switchMode = () => {
        
         setIsSignup((prevIsSignup) => !prevIsSignup);
-        // console.log(isSignup);
+      
         setShowPassword(false);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(isSignup)
+    
         if (isSignup) {
             dispatch(signup(form, history));
         } else {
@@ -42,7 +50,7 @@ const AuthVolunteer = () => {
 
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-    console.log(form)
+
 
     return (
         <Container component="main" maxWidth="xs">

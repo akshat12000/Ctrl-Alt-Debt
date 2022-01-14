@@ -6,12 +6,11 @@ const volunteerSchema = mongoose.Schema({
   password: { type: String, required: true },
   classRange: { type: [Number], required: true },
   subjects: { type: [String], required: true },
-  meetings: { type: [String], required: true },
-  timings: { type: [String], required: true },
+  meetings: { type: [String] },
+  timings: { type: [String] },
   sessionsTaken: {
     type: Number,
     default: 0,
-    required: true,
   },
 });
 
