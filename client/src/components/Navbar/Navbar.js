@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AppBar, Typography, Toolbar, Avatar, Button, Drawer,List,ListItem, IconButton, Divider} from '@material-ui/core';
+import { AppBar, Typography, Toolbar, Avatar, Button, Drawer,List,ListItem, IconButton} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import {useHistory, useLocation ,Link} from 'react-router-dom';
@@ -75,15 +75,13 @@ const Navbar = ({open,setOpen}) => {
             </AppBar>
             <Drawer align="left" variant="persistent" classes={{paper:classes.paperWidth}} open={open}>
                 <div className={classes.drawerHeader}>
-                    <IconButton onClick={handleDrawerClose}>
+                    <IconButton onClick={handleDrawerClose} style={{color:"white"}}>
                         <ChevronLeftIcon />
                     </IconButton>
                 </div>
-                <Divider/>
                 <List>
                     <ListItem button>Hello</ListItem>
                     <ListItem button>About</ListItem>
-                    <Divider/>
                     <ListItem button>Contact</ListItem>
                     <ListItem button>Projects</ListItem>
                 </List>

@@ -5,13 +5,15 @@ const drawerWidth = 240;
 
 export default makeStyles((theme) => ({
   appBar: {
-    borderRadius: 15,
-    margin: '30px 0',
+    borderRadius: 5,
+    margin: '0 0 30px 0',
+    // background: "linear-gradient(40deg,#ff6ec4,#7873f5)",
+    backgroundImage: "linear-gradient(to right, #4983fb, #009dff, #00b3ff, #03c7fc, #5bd8f5)",
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '10px 50px',
+    padding: "1px 15px"
   },
   navBrand:{
     display:"flex",
@@ -62,13 +64,18 @@ export default makeStyles((theme) => ({
     marginLeft:"15px"
   },
   paperWidth:{
-    width:drawerWidth
+    width:drawerWidth,
+    backgroundImage: "linear-gradient(to bottom, #4983fb, #009dff, #00b3ff, #03c7fc, #5bd8f5)",
+    color:"white",
+    fontSize:"1.3rem",
+    fontFamily:"Lato"
   },
   root:{
-    display:"flex"
+    display:"flex",
+    color:"white"
   },
   widthChanger:{
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
-  }
+  },
 }));
