@@ -14,5 +14,5 @@ const volunteerSchema = mongoose.Schema({
   },
 });
 
-const volunteerModel = mongoose.model("volunteerModel", volunteerSchema);
-export default volunteerModel;
+const volunteer = mongoose.model("volunteer", volunteerSchema);
+export default volunteer;

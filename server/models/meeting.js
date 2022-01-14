@@ -26,5 +26,5 @@ const meetingSchema = mongoose.Schema({
   doubtDescription: { type: String, required: true },
 });
 
-const meetingModel = mongoose.model("meetingModel", meetingSchema);
-export default meetingModel;
+const meeting = mongoose.model("meeting", meetingSchema);
+export default meeting;

@@ -16,5 +16,5 @@ const blogsSchema = mongoose.Schema({
   },
 });
 
-const blogsModel = mongoose.model("blogsModel", blogsSchema);
-export default blogsModel;
+const blog = mongoose.model("blog", blogsSchema);
+export default blog;

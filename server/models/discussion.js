@@ -11,5 +11,5 @@ const discussionSchema = mongoose.Schema({
   ],
 });
 
-const discussionModel = mongoose.model("discussionModel", discussionSchema);
-export default discussionModel;
+const discussion = mongoose.model("discussion", discussionSchema);
+export default discussion;
