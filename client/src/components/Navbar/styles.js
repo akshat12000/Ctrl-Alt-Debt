@@ -1,6 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { deepPurple } from '@material-ui/core/colors';
 
+const drawerWidth = 240;
+
 export default makeStyles((theme) => ({
   appBar: {
     borderRadius: 15,
@@ -10,6 +12,21 @@ export default makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '10px 50px',
+  },
+  navBrand:{
+    display:"flex",
+    justifyContent:"space-between"
+  },
+  drawerHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-end',
+  },
+  hide:{
+    visibility:'hidden'
   },
   heading: {
     color: 'rgba(0,183,255, 1)',
@@ -40,4 +57,18 @@ export default makeStyles((theme) => ({
     color: theme.palette.getContrastText(deepPurple[500]),
     backgroundColor: deepPurple[500],
   },
+  Header:{
+    marginTop:"6px",
+    marginLeft:"15px"
+  },
+  paperWidth:{
+    width:drawerWidth
+  },
+  root:{
+    display:"flex"
+  },
+  widthChanger:{
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+  }
 }));

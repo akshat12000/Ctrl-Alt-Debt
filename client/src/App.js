@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
@@ -11,11 +11,12 @@ import Auth from './components/Auth/Auth'
 
 
 const App = () => {
+    const [open,setOpen]=useState(false);
     return (
         <BrowserRouter>
-            <Navbar/>
+            <Navbar open={open} setOpen={setOpen}/>
             <Switch>
-                <Route exact path="/" component={Home} />
+                <Route exact path="/" render={()=><Home open={open}/>} />
                 <Route exact path="/auth" component={Auth} />
                 <Route exact path="/auth/student" component={AuthStudent} />  
                 <Route exact path="/auth/volunteer" component={AuthVolunteer} />  
