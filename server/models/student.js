@@ -10,6 +10,7 @@ const studentSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  userType: { type: String, required: true },
 });
 
 const student = mongoose.model("student", studentSchema);

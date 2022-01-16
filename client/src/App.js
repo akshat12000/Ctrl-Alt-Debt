@@ -7,7 +7,7 @@ import AuthStudent from './components/AuthStudent/AuthStudent'
 import AuthVolunteer from './components/AuthVolunteer/AuthVolunteer'
 import Navbar from './components/Navbar/Navbar'
 import Auth from './components/Auth/Auth'
-
+import BookMeeting from './components/BookMeeting/BookMeeting'
 
 
 const App = () => {
@@ -18,7 +18,8 @@ const App = () => {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/auth" component={Auth} />
                 <Route exact path="/auth/student" component={AuthStudent} />  
-                <Route exact path="/auth/volunteer" component={AuthVolunteer} />  
+                <Route exact path="/auth/volunteer" component={AuthVolunteer} />
+                <Route exact path="/student/bookMeeting" component={BookMeeting} />  
             </Switch>
         
         </BrowserRouter>

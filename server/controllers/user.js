@@ -58,7 +58,7 @@ export const signup = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    const result = await student.create({ email, password: hashedPassword, name, year});
+    const result = await student.create({ email, password: hashedPassword, name, year,userType});
     const token = jwt.sign( { email: result.email, id: result._id }, secret, { expiresIn: "1h" } );
 
     res.status(201).json({ result, token });
@@ -71,10 +71,10 @@ export const signup = async (req, res) => {
       const oldUser = await volunteer.findOne({ email });
 
       if (oldUser) return res.status(400).json({ message: "User already exists" });
-  
+      
       const hashedPassword = await bcrypt.hash(password, 12);
   
-      const result = await volunteer.create({ email, password: hashedPassword, name, classRange, subjects, });
+      const result = await volunteer.create({ email, password: hashedPassword, name, classRange, subjects,userType });
       const token = jwt.sign( { email: result.email, id: result._id }, secret, { expiresIn: "1h" } );
   
       res.status(201).json({ result, token });
