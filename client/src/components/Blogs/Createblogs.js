@@ -24,6 +24,10 @@ function Createblogs({open}) {
     const classes = useStyles();
     const dispatch = useDispatch();
 
+    if(!info){
+        history.push("/auth");
+    }
+
     const handleSubmit = (e)=>{
         e.preventDefault();
         if(blog.title&&blog.body&&blog.year&&blog.subject){
