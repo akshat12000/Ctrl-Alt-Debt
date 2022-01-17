@@ -15,12 +15,14 @@ const Navbar = ({open,setOpen}) => {
     const location = useLocation();
     const history = useHistory();
     const classes = useStyles();
+    const volunteerLinks = ["/schedule-meeting","/allot-time","/discussion-forum","/blogs"];
+    const studentLinks = ["/book-meeting","/my-bookings","/discussion-forum","/blogs","/leaderboard"];
 
     const logout = () => {
         dispatch({ type: actionType.LOGOUT });
 
         history.push('/auth');
-
+        setOpen(false);
         setUser(null);
     };
 
@@ -32,8 +34,9 @@ const Navbar = ({open,setOpen}) => {
     const handleDrawerClose = ()=>{
         setOpen(false);
     }
-
-
+    const assign = (link)=>{
+        history.push(link);
+    }
     useEffect(() => {
         const token = user?.token;
 
@@ -80,10 +83,9 @@ const Navbar = ({open,setOpen}) => {
                     </IconButton>
                 </div>
                 <List>
-                    <ListItem button>Hello</ListItem>
-                    <ListItem button>About</ListItem>
-                    <ListItem button>Contact</ListItem>
-                    <ListItem button>Projects</ListItem>
+                    {user?(user.result.hasOwnProperty('classRange')?
+                    volunteerLinks.map((link)=><ListItem onClick={()=>assign(link)} button>{link.slice(1).replace("-"," ").toUpperCase()}</ListItem>):
+                    studentLinks.map((link)=><ListItem onClick={()=>assign(link)} button>{link.slice(1).replace("-"," ").toUpperCase()}</ListItem>)):null}
                 </List>
             </Drawer>
         </div>
