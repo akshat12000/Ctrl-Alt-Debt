@@ -8,6 +8,7 @@ const secret = 'test';
 
 export const signin = async (req, res) => {
  
+ 
   const { email, password,userType } = req.body;
 
   try {
@@ -45,7 +46,7 @@ export const signin = async (req, res) => {
 };
 
 export const signup = async (req, res) => {
- 
+  console.log(req.body);
     const {userType}=req.body;
  
   try {

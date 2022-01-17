@@ -80,9 +80,9 @@ const AuthVolunteer = () => {
         } else {
             dispatch(signin(form, history));
         }
-        setForm(initialState,userType);
-        setYearState(initialYear);
-        setSubjectState(initialSubjects);
+        // setForm(initialState,userType);
+        // setYearState(initialYear);
+        // setSubjectState(initialSubjects);
         
     };
 
