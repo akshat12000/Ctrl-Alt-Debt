@@ -1,28 +1,29 @@
 import React,{useState} from 'react'
 import useStyles from './styles'
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, TextField, Typography } from '@material-ui/core';
 import { createBlogs } from '../../actions/blog';
 
-const info = JSON.parse(localStorage.getItem('profile'));
-const name = info?info.result.name:"guest";
-const id = info?info.result._id:"0";
-
-const initialState={
-    title: "",
-    body: "",
-    year: "",
-    subject:"",
-    creator:{name,id},
-    upvotes:0
-}
-
-function Createblogs({open}) {
+function Createblogs() {
     const history= useHistory();
+    const info = JSON.parse(localStorage.getItem('profile'));
+    const name = info?info.result.name:"guest";
+    const id = info?info.result._id:"0";
+    const initialState={
+        title: "",
+        body: "",
+        year: "",
+        subject:"",
+        creator:{name,id},
+        upvotes:0
+    }
+
     const [blog,setBlog]=useState(initialState);
     const classes = useStyles();
     const dispatch = useDispatch();
+
+    const open = useSelector((state)=>state.open);
 
     if(!info){
         history.push("/auth");

@@ -2,13 +2,14 @@ import { Avatar, Button, Card, CardActions, CardContent, CardHeader, IconButton,
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import useStyles from './styles';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlined from '@mui/icons-material/DeleteOutlineOutlined';
 import ReadMoreBlog from './ReadMoreBlog';
 import Updateblogs from './Updateblogs';
 import { useDispatch } from 'react-redux';
 import { deleteBlogs, likeBlogs } from '../../actions/blog';
+import { Redirect } from 'react-router-dom';
 
 function Blog({blog,id,name}) {
     const classes = useStyles();
@@ -17,6 +18,7 @@ function Blog({blog,id,name}) {
     const [opening,setOpening]=useState(false);
     const [updateOpen,setUpdateOpen]=useState(false);
     const dispatch = useDispatch();
+
 
     const upvote = ()=>{
         setLiked(true);

@@ -3,36 +3,35 @@ import { AppBar, Typography, Toolbar, Avatar, Button, Drawer,List,ListItem, Icon
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import {useHistory, useLocation ,Link} from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import decode from 'jwt-decode';
 
 import * as actionType from '../../constants/actionTypes';
 import useStyles from './styles';
 
-const Navbar = ({open,setOpen}) => {
+const Navbar = () => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const dispatch = useDispatch();
     const location = useLocation();
     const history = useHistory();
     const classes = useStyles();
-    const volunteerLinks = ["/schedule-meeting","/allot-time","/discussion-forum","/blogs"];
-    const studentLinks = ["/book-meeting","/my-bookings","/discussion-forum","/blogs","/leaderboard"];
+    const volunteerLinks = ["/schedule-meeting","/allot-time","/discussion","/blogs"];
+    const studentLinks = ["/book-meeting","/my-bookings","/discussion","/blogs","/leaderboard"];
+    const open = useSelector((state)=>state.open);
 
     const logout = () => {
         dispatch({ type: actionType.LOGOUT });
-
         history.push('/auth');
-        setOpen(false);
+        dispatch({type:"UNSET"});
         setUser(null);
     };
-
     const eliminatedLinks = ["/auth","/auth/student","/auth/volunteer"];
 
     const handleDrawerOpen = ()=>{
-        setOpen(true);
+        dispatch({type:"SET"});
     }
     const handleDrawerClose = ()=>{
-        setOpen(false);
+        dispatch({type:"UNSET"});
     }
     const assign = (link)=>{
         history.push(link);
@@ -58,7 +57,7 @@ const Navbar = ({open,setOpen}) => {
                             onClick={handleDrawerOpen}
                             edge="start"
                             id="open"
-                            className={ (open||eliminatedLinks.includes(location.pathname))?classes.hide:null}
+                            className={ (open||eliminatedLinks.includes(location.pathname)||!user)?classes.hide:null}
                         >
                             <MenuIcon />
                         </IconButton>
