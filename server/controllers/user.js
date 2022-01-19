@@ -32,12 +32,12 @@ export const signin = async (req, res) => {
           val:oldUser._id
         })
        await dUser.save();
-        await student.findByIdAndUpdate(oldUser._id,{$inc:{dayCount:5}})
-        res.status(200).json({ result: oldUser, token,message:"first" });
+        const newUser = await student.findByIdAndUpdate(oldUser._id,{$inc:{dayCount:5}})
+        res.status(200).json({ result: newUser, token,message:"first" });
       }else if(getUser && getUser.date!==nDate){
         await dailyLogin.findOneAndUpdate({uId},{date:nDate,val:getUser.val});
-        await student.findByIdAndUpdate(oldUser._id,{$inc:{dayCount:1}})
-        res.status(200).json({ result: oldUser, token,message:"first" });
+        const newUser = await student.findByIdAndUpdate(oldUser._id,{$inc:{dayCount:1}})
+        res.status(200).json({ result: newUser, token,message:"first" });
       }else{
         res.status(200).json({ result: oldUser, token,message:"second" });
       }
@@ -87,12 +87,12 @@ export const signup = async (req, res) => {
           val:result._id
         })
        await dUser.save();
-        await student.findByIdAndUpdate(result._id,{$inc:{dayCount:5}})
-        res.status(200).json({ result: result, token,message:"first" });
+        const newResult = await student.findByIdAndUpdate(result._id,{$inc:{dayCount:5}})
+        res.status(200).json({ result: newResult, token,message:"first" });
       }else if(getUser && getUser.date!==nDate){
         await dailyLogin.findOneAndUpdate({uId},{date:nDate,val:getUser.val});
-        await student.findByIdAndUpdate(result._id,{$inc:{dayCount:1}})
-        res.status(200).json({ result: result, token,message:"first" });
+        const newResult = await student.findByIdAndUpdate(result._id,{$inc:{dayCount:1}})
+        res.status(200).json({ result: newResult, token,message:"first" });
       }else{
         res.status(200).json({ result: result, token,message:"second" });
       }

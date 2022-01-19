@@ -8,6 +8,7 @@ import userRouter from "./routes/user.js";
 import bookingRouter from "./routes/booking.js";
 import blogsRouter from './routes/blogs.js';
 import discussionRoutes from "./routes/doubts.js";
+import leaderboardRouter from "./routes/leaderboard.js";
 
 
 const app = express();
@@ -21,6 +22,7 @@ app.use("/blogs",blogsRouter);
 app.use("/user", userRouter);
 app.use("/discussion", discussionRoutes);
 app.use("/booking", bookingRouter);
+app.use("/leaderboard", leaderboardRouter);
 
 const PORT = process.env.PORT|| 5000;
 

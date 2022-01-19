@@ -15,6 +15,7 @@ import Createblogs from './components/Blogs/Createblogs'
 import Blogs from './components/Blogs/Blogs'
 import DoubtDetails from './components/DoubtDetails/DoubtDetails'
 import Resources from './components/Resources/Resources'
+import LeaderBoard from './components/LeaderBoard/LeaderBoard'
 
 const App = () => {
     return (
@@ -37,6 +38,7 @@ const App = () => {
                 <Route exact path="/discussion" component={Discussion} /> 
                 <Route exact path="/discussion/:id" component={DoubtDetails} />
                 <Route exact path="/resources" component={Resources} /> 
+                <Route exact path="/leaderboard" component={LeaderBoard} /> 
             </Switch>
         </BrowserRouter>
     )
