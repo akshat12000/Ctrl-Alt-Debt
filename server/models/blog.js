@@ -8,12 +8,17 @@ const blogsSchema = mongoose.Schema({
     required: true,
   },
   subject: { type: String, required: true },
-  creator: { type: String, required: true },
+  creator: { name:{type: String, required: true},id:{type: String,required:true} },
   upvotes: {
     type: Number,
     default: 0,
     required: true,
   },
+  upvoteList:{
+    type:[String],
+    required:true,
+    default:[],
+  }
 });
 
 const blog = mongoose.model("blog", blogsSchema);
