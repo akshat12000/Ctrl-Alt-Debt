@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import dailyLogin from "../models/dailyLogin.js";
 
 import student from "../models/student.js";
 import volunteer from "../models/volunteer.js";
@@ -21,8 +22,24 @@ export const signin = async (req, res) => {
       if (!isPasswordCorrect) return res.status(400).json({ message: "Invalid credentials" });
   
       const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, secret, { expiresIn: "1h" });
-  
-      res.status(200).json({ result: oldUser, token });
+
+      const uId=oldUser._id;
+      const nDate = new Date().toLocaleDateString();
+      const getUser = await dailyLogin.findOne({uId});
+      if(!getUser){
+        const dUser = new dailyLogin({
+          val:oldUser._id
+        })
+       await dUser.save();
+        await student.findByIdAndUpdate(oldUser._id,{$inc:{dayCount:5}})
+        res.status(200).json({ result: oldUser, token,message:"first" });
+      }else if(getUser && getUser.date!==nDate){
+        await dailyLogin.findOneAndUpdate({uId},{date:nDate,val:getUser.val});
+        await student.findByIdAndUpdate(oldUser._id,{$inc:{dayCount:1}})
+        res.status(200).json({ result: oldUser, token,message:"first" });
+      }else{
+        res.status(200).json({ result: oldUser, token,message:"second" });
+      }
     }
     else{
       const oldUser = await volunteer.findOne({ email });
@@ -60,8 +77,23 @@ export const signup = async (req, res) => {
     const result = await student.create({ email, password: hashedPassword, name, year });
     const token = jwt.sign( { email: result.email, id: result._id }, secret, { expiresIn: "1h" } );
 
-    res.status(201).json({ result, token });
-
+    const uId=result._id;
+      const nDate = new Date().toLocaleDateString();
+      const getUser = await dailyLogin.findOne({uId});
+      if(!getUser){
+        const dUser = new dailyLogin({
+          val:result._id
+        })
+       await dUser.save();
+        await student.findByIdAndUpdate(result._id,{$inc:{dayCount:5}})
+        res.status(200).json({ result: result, token,message:"first" });
+      }else if(getUser && getUser.date!==nDate){
+        await dailyLogin.findOneAndUpdate({uId},{date:nDate,val:getUser.val});
+        await student.findByIdAndUpdate(result._id,{$inc:{dayCount:1}})
+        res.status(200).json({ result: result, token,message:"first" });
+      }else{
+        res.status(200).json({ result: result, token,message:"second" });
+      }
 
     }
     else if(userType=="volunteer"){

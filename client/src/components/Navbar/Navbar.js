@@ -18,7 +18,6 @@ const Navbar = () => {
     const volunteerLinks = ["/schedule-meeting","/allot-time","/discussion","/blogs"];
     const studentLinks = ["/book-meeting","/my-bookings","/discussion","/blogs","/leaderboard", "/resources"];
     const open = useSelector((state)=>state.open);
-
     const logout = () => {
         dispatch({ type: actionType.LOGOUT });
         history.push('/auth');

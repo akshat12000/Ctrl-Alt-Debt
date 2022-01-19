@@ -11,8 +11,6 @@ import Blogs from './components/Blogs/Blogs'
 import DoubtDetails from './components/DoubtDetails/DoubtDetails'
 import Resources from './components/Resources/Resources'
 
-
-
 const App = () => {
     return (
         <BrowserRouter>
@@ -29,7 +27,6 @@ const App = () => {
                 <Route exact path="/discussion/:id" component={DoubtDetails} />
                 <Route exact path="/resources" component={Resources} /> 
             </Switch>
-        
         </BrowserRouter>
     )
 }

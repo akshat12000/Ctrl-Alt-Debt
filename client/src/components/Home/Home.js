@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import useStyles from './styles';
 import Carousel from 'react-material-ui-carousel'
 import { Button, Paper } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import LoginSnack from './LoginSnack';
 
 const info = JSON.parse(localStorage.getItem('profile'));
 
@@ -11,6 +12,7 @@ const Home = () => {
     const classes = useStyles();
     const history = useHistory();
     const open = useSelector((state)=>state.open);
+    const [ok,setOk]=useState(true);
     if(!info){
         history.push("/auth");
     }
@@ -32,6 +34,7 @@ const Home = () => {
                 items.map( (item, i) => <Item key={i} item={item} /> )
             }
         </Carousel>
+        <LoginSnack info={info} ok={ok} setOk={setOk}/>
         </div>
     )
 }
