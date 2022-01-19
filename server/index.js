@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 
 import userRouter from "./routes/user.js";
 import blogsRouter from './routes/blogs.js';
+import discussionRoutes from "./routes/doubts.js";
 
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(cors());
 
 app.use("/blogs",blogsRouter);
 app.use("/user", userRouter);
+app.use("/discussion", discussionRoutes);
 
 const PORT = process.env.PORT|| 5000;
 
