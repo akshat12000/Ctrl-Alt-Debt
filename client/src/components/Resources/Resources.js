@@ -1,13 +1,17 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import useStyles from './styles'
 
 const Resources = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
   console.log(user?.result.year);
   const userYear = user?.result.year;
+  const classes=useStyles();
+  const open = useSelector((state)=>state.open);
+
   return (
-    <div>
+    <div className={open?classes.root:null}>
       {user ? (
         user.result.hasOwnProperty("classRange") ? (
           <Typography variant="h1" style={{ textAlign: "center" }}>
