@@ -2,15 +2,21 @@
 import { TextField, Typography, Button, Select, InputLabel, FormControl, Grid } from "@material-ui/core";
 import DatePicker from "react-datepicker";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import axios from 'axios';
 
 import "react-datepicker/dist/react-datepicker.css";
 
 import moment from 'moment';
+import {  format } from 'date-fns'
 
 
 const AvailableTimings = () => {
 
-    const [inputList, setInputList] = useState([{ date: '', startTime: "", endTime: "" }]);
+    const [inputList, setInputList] = useState([{ date: '', startTime: "", endTime: "" ,dates:''}]);
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+    const [dates, setDates] = useState([{dates:''}]);
+    const history = useHistory();
 
     const handleInputChange = (e, index) => {
         
@@ -22,12 +28,39 @@ const AvailableTimings = () => {
     };
 
     const handleAddClick = () => {
-        setInputList([...inputList, { date: '', startTime: "", endTime: "" }    ]);
+        setInputList([...inputList, { date: '', startTime: "", endTime: "",dates:'' }    ]);
+        
       };
     
-    const handleSubmit = (e) => {
+    const handleSubmit =  (e) => {
         e.preventDefault();
+        let availableslots=[];
+        inputList.map(item=>{
+            let slots=(moment(item.endTime,'HH:mm').diff(moment(item.startTime,'HHmm'),'minutes'))/30;
+            let curslot=moment(item.startTime,'HH:mm').format('HH:mm');
+            let temp='';
+            temp=item.date;
+            temp=temp+' '+curslot;
+            availableslots.push(temp);
+            slots--;
         
+            while(slots--)
+            {
+                curslot=moment(curslot,'HH:mm').add(30,'minutes').format('HH:mm');
+                temp=item.date+' '+curslot;
+                availableslots.push(temp);
+                 
+
+            }
+        })
+      axios.post('http://localhost:5000/booking/availableTimeSlots',{availableslots,user})
+
+       history.push('/');
+
+
+        
+
+
     }
     return (
         <div >
@@ -37,9 +70,12 @@ const AvailableTimings = () => {
             {inputList.map((x, i) => {
                return(
                    <>
-                <DatePicker selected={x.date} onChange={(date)=>{ 
+                <DatePicker selected={x.dates} format='yyyy-MM-dd' onChange={(date)=>{ 
+                    const modifydate=date.toLocaleDateString();
+                  
                     const list = [...inputList];
-                    list[i]['date'] = date;
+                    list[i]['date'] =modifydate  ;
+                    list[i]['dates'] =date  ;
                     setInputList(list);
                }
                } />

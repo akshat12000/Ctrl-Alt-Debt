@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 
 
 import userRouter from "./routes/user.js";
+import bookingRouter from "./routes/booking.js";
 
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors());
 
 app.use("/user", userRouter);
+app.use("/booking", bookingRouter);
 
 
 

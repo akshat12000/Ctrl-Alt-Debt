@@ -33,7 +33,7 @@ const AuthVolunteer = () => {
         year10: false,year11: false,year12: false
     };
     let initialSubjects ={
-        maths: false,  english: false,  science: false, social: false,computer: false,
+        maths: false,  english: false,  science: false, social: false,computer: false,physics: false,chemistry: false,biology: false,
         
     };
 
@@ -147,6 +147,10 @@ const AuthVolunteer = () => {
                                         <FormControlLabel control={<Checkbox checked={subjectState.science} onChange={handleSubjectChange} name="science" />} label="Science" />
                                         <FormControlLabel control={<Checkbox checked={subjectState.social} onChange={handleSubjectChange} name="social" />} label="Social" />
                                         <FormControlLabel control={<Checkbox checked={subjectState.computer} onChange={handleSubjectChange} name="computer" />} label="Computer" />
+                                        <FormControlLabel control={<Checkbox checked={subjectState.physics} onChange={handleSubjectChange} name="physics" />} label="Physics" />
+                                        <FormControlLabel control={<Checkbox checked={subjectState.chemistry} onChange={handleSubjectChange} name="chemistry" />} label="Chemistry" />
+                                        <FormControlLabel control={<Checkbox checked={subjectState.biology} onChange={handleSubjectChange} name="biology" />} label="Biology" />
+                                        
 
                                     </FormGroup>
                                 </Grid>
