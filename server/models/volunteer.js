@@ -13,6 +13,10 @@ const volunteerSchema = mongoose.Schema({
     default: 0,
   },
   userType: { type: String, required: true },
+  score: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const volunteer = mongoose.model("volunteer", volunteerSchema);
