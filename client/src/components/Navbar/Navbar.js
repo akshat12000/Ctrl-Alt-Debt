@@ -15,8 +15,8 @@ const Navbar = () => {
     const location = useLocation();
     const history = useHistory();
     const classes = useStyles();
-    const volunteerLinks = ["/schedule-meeting","/allot-time","/discussion","/blogs"];
-    const studentLinks = ["/book-meeting","/my-bookings","/discussion","/blogs","/leaderboard", "/resources"];
+    const volunteerLinks = ["/volunteer/availableTimings","/volunteer/myMeetings","/discussion","/blogs"];
+    const studentLinks = ["/student/bookMeeting","/student/myBookings","/discussion","/blogs","/leaderboard", "/resources"];
     const open = useSelector((state)=>state.open);
     const logout = () => {
         dispatch({ type: actionType.LOGOUT });
@@ -82,8 +82,8 @@ const Navbar = () => {
                 </div>
                 <List>
                     {user?(user.result.hasOwnProperty('classRange')?
-                    volunteerLinks.map((link)=><ListItem onClick={()=>assign(link)} button>{link.slice(1).replace("-"," ").toUpperCase()}</ListItem>):
-                    studentLinks.map((link)=><ListItem onClick={()=>assign(link)} button>{link.slice(1).replace("-"," ").toUpperCase()}</ListItem>)):null}
+                    volunteerLinks.map((link)=><ListItem onClick={()=>assign(link)} button>{link.slice(1).replace("-"," ").replace("/","").replace("volunteer","").toUpperCase()}</ListItem>):
+                    studentLinks.map((link)=><ListItem onClick={()=>assign(link)} button>{link.slice(1).replace("-"," ").replace("/","").replace("student","").toUpperCase()}</ListItem>)):null}
                 </List>
             </Drawer>
         </div>

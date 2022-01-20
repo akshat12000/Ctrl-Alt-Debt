@@ -8,7 +8,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import moment from "moment";
 import { Grid } from "@material-ui/core";
-
+import { useSelector } from "react-redux";
+const drawerWidth=240;
 const useStyles = makeStyles({
     root: {
         minWidth: 275,
@@ -24,6 +25,10 @@ const useStyles = makeStyles({
     pos: {
         marginBottom: 12,
     },
+    goal:{
+        width: `calc(100% - ${drawerWidth}px)`,
+        marginLeft: drawerWidth,
+    }
 });
 
 
@@ -31,9 +36,8 @@ const useStyles = makeStyles({
 const MyBookings = () => {
     const [bookings, setBookings] = useState([]);
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
-    const classes = useStyles();; 
-
-
+    const classes = useStyles();
+    const open = useSelector((state)=>state.open);
 
     useEffect(() => {
         const getBookings = async () => {
@@ -47,14 +51,13 @@ const MyBookings = () => {
 
 
     return (
-        <div>
-            <h1>My Bookings</h1>
-            
-                <Grid spacing={3}>
+        <div className={open?classes.goal:null}>
+            <Typography variant="h3" style={{textAlign:"center"}} gutterBottom>My Bookings</Typography>
+                <div style={{display:"flex",flexWrap:"wrap",flexBasis:"25%",width:"100%"}}>
                 {bookings.map(booking => {
                     return (
                         <>
-                            <Card className={classes.root} keu={booking._id} variant="outlined">
+                            <Card className={classes.root} key={booking._id} variant="outlined" style={{margin:"1%"}}>
                                 <CardContent>
                                     <Typography variant="h5" component="h2">
                                         {booking.subject}
@@ -67,7 +70,7 @@ const MyBookings = () => {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Button size="small">Meet Link</Button>
+                                    <Button size="small" variant="contained" color="secondary">Meet Link</Button>
                                 </CardActions>
                             </Card>
                             
@@ -78,8 +81,7 @@ const MyBookings = () => {
                     )
                 }
                 )}
-                </Grid>
-
+                </div>
             </div>
 
 

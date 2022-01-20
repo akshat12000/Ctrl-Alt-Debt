@@ -8,7 +8,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import moment from "moment";
 import { Grid } from "@material-ui/core";
+import { useSelector } from "react-redux";
 
+const drawerWidth=240;
 const useStyles = makeStyles({
     root: {
         minWidth: 275,
@@ -24,6 +26,10 @@ const useStyles = makeStyles({
     pos: {
         marginBottom: 12,
     },
+    goal:{
+        width: `calc(100% - ${drawerWidth}px)`,
+        marginLeft: drawerWidth,
+    }
 });
 
 
@@ -32,6 +38,7 @@ const MyMeetings = () => {
     const [bookings, setBookings] = useState([]);
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const classes = useStyles();
+    const open=useSelector((state)=>state.open);
     
     const handleCancel = async (bookingId) => {
         console.log(bookingId);
@@ -59,10 +66,10 @@ const MyMeetings = () => {
 
 
     return (
-        <div>
-            <h1>My Meetings</h1>
+        <div className={open?classes.goal:null}>
+            <Typography variant="h3" style={{textAlign:"center"}}>My Meetings</Typography>
             
-                <Grid spacing={3}>
+                <div style={{display:"flex",flexWrap:"wrap",flexBasis:"25%",width:"100%"}}>
                 {bookings.map(booking => {
                     return (
                         <>
@@ -92,7 +99,7 @@ const MyMeetings = () => {
                     )
                 }
                 )}
-                </Grid>
+                </div>
 
             </div>
 

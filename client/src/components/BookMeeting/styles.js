@@ -1,6 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
-
+const drawerWidth = 240;
 export default makeStyles((theme) => ({
+  goal:{
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+},
   paper: {
     
     marginTop: theme.spacing(8),

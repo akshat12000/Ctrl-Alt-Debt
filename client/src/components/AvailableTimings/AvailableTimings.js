@@ -206,7 +206,7 @@ const AvailableTimings = () => {
 
                     </Select>
                 </FormControl>
-                {inputList.length - 1 === i && <button onClick={handleAddClick}>Add</button>}
+                {inputList.length - 1 === i && <Button onClick={handleAddClick} variant="outlined" color="secondary" >Add</Button>}
                 </>
                )
             })}
