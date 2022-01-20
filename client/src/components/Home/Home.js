@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import useStyles from './styles';
-import Carousel from 'react-material-ui-carousel'
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 import { Button, Paper } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -18,37 +19,61 @@ const Home = () => {
     }
     var items = [
         {
-            name: "Random Name #1",
-            description: "Probably the most random thing you have ever seen!"
+            name: "../../images/Available_Timings.png",
+            description: "Available Timings"
         },
-        {
-            name: "Random Name #2",
-            description: "Hello World!"
-        }
+        // {
+        //     name: "Random Name #2",
+        //     description: "Hello World!"
+        // },
+        // {
+        //     name: "Random Name #1",
+        //     description: "Probably the most random thing you have ever seen!"
+        // },
+        // {
+        //     name: "Random Name #2",
+        //     description: "Hello World!"
+        // },
+        // {
+        //     name: "Random Name #1",
+        //     description: "Probably the most random thing you have ever seen!"
+        // },
+        // {
+        //     name: "Random Name #2",
+        //     description: "Hello World!"
+        // }
     ]
 
     return (
         <div className={open?classes.root:null}>
-        <Carousel>
-            {
-                items.map( (item, i) => <Item key={i} item={item} /> )
-            }
+        <Carousel width={"78%"}  className={classes.centered} autoPlay={true} >
+            <Paper>
+                <img src={require("../../images/Available_Timings.png")}/>
+                <p className="legend">Available Timings</p>
+            </Paper>
+            <Paper>
+                <img src={require("../../images/Blogs.png")}/>
+                <p className="legend">Blogs</p>
+            </Paper>
+            <Paper>
+                <img src={require("../../images/Book_Slot.png")}/>
+                <p className="legend">Book Slots</p>
+            </Paper>
+            <Paper>
+                <img src={require("../../images/Discussion.png")}/>
+                <p className="legend">Discussion</p>
+            </Paper>
+            <Paper>
+                <img src={require("../../images/Leaderboard.png")}/>
+                <p className="legend">Leaderboard</p>
+            </Paper>
+            <Paper>
+                <img src={require("../../images/Resources.png")}/>
+                <p className="legend">Resources</p>
+            </Paper>
         </Carousel>
         <LoginSnack info={info} ok={ok} setOk={setOk}/>
         </div>
-    )
-}
-function Item(props)
-{
-    return (
-        <Paper>
-            <h2>{props.item.name}</h2>
-            <p>{props.item.description}</p>
-
-            <Button className="CheckButton">
-                Check it out!
-            </Button>
-        </Paper>
     )
 }
 

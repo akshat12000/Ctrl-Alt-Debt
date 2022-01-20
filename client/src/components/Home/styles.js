@@ -6,5 +6,8 @@ export default makeStyles((theme)=>({
     root:{
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: drawerWidth,
+    },
+    centered:{
+        marginLeft:"15%"
     }
 }))
