@@ -14,7 +14,7 @@ function MyApp() {
       if(info&&info.message==="first"){
           handleClickVariant("success");
       }
-  },[info]);
+  },[localStorage.getItem('profile')]);
 
   return (
     <div>

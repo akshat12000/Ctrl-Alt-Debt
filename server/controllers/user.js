@@ -26,12 +26,13 @@ export const signin = async (req, res) => {
 
       const uId=oldUser._id;
       const nDate = new Date().toLocaleDateString();
-      const getUser = await dailyLogin.findOne({uId});
+      const getUser = await dailyLogin.findOne({val:uId});
       if(!getUser){
         const dUser = new dailyLogin({
           val:oldUser._id
         })
        await dUser.save();
+       console.log("saved daily!")
         const newUser = await student.findByIdAndUpdate(oldUser._id,{$inc:{dayCount:5}})
         res.status(200).json({ result: newUser, token,message:"first" });
       }else if(getUser && getUser.date!==nDate){
@@ -81,7 +82,7 @@ export const signup = async (req, res) => {
 
     const uId=result._id;
       const nDate = new Date().toLocaleDateString();
-      const getUser = await dailyLogin.findOne({uId});
+      const getUser = await dailyLogin.findOne({val:uId});
       if(!getUser){
         const dUser = new dailyLogin({
           val:result._id

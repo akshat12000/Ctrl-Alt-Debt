@@ -17,32 +17,6 @@ const Home = () => {
     if(!info){
         history.push("/auth");
     }
-    var items = [
-        {
-            name: "../../images/Available_Timings.png",
-            description: "Available Timings"
-        },
-        // {
-        //     name: "Random Name #2",
-        //     description: "Hello World!"
-        // },
-        // {
-        //     name: "Random Name #1",
-        //     description: "Probably the most random thing you have ever seen!"
-        // },
-        // {
-        //     name: "Random Name #2",
-        //     description: "Hello World!"
-        // },
-        // {
-        //     name: "Random Name #1",
-        //     description: "Probably the most random thing you have ever seen!"
-        // },
-        // {
-        //     name: "Random Name #2",
-        //     description: "Hello World!"
-        // }
-    ]
 
     return (
         <div className={open?classes.root:null}>
