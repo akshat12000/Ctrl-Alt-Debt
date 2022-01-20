@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import axios from "axios";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -11,14 +10,34 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import { withStyles } from "@material-ui/core/styles";
+
+const drawerWidth = 240;
 
 const useStyles = makeStyles({
-    table: {
-      minWidth: 650,
-    },
-  });
+  table: {
+    minWidth: 650,
+  },
+  tableRow: {
+    backgroundColor: "#3f51b5",
+  },
+  tableCell: {
+    color: "pink",
+  },
+  root:{
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+},
+});
+
+const WhiteTextTypography = withStyles({
+  root: {
+    color: "#FFFFFF",
+  },
+})(Typography);
 
 const LeaderBoard = () => {
+  const open = useSelector((state) => state.open);
   const classes = useStyles();
   const [leaderboard, setLeaderboard] = useState([]);
   useEffect(() => {
@@ -30,42 +49,64 @@ const LeaderBoard = () => {
     getLeaderboard();
   }, []);
 
-  //   const user = JSON.parse(localStorage.getItem("profile"));
-  //   console.log(user);
-  //   const name = user ? user.result.name : "0";
-  //   const dayCount = user ? user.result.dayCount : "0";
-  //   console.log(name);
-  //   console.log(dayCount);
   return (
-<div>
-    <Typography variant="h3" color="primary">Leaderboard(Based on daily login count)</Typography>
-    <br/>
-            <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="simple table">  
-              <TableHead>
-                <TableRow>
-                  <TableCell ><Typography variant="h5" color="primary"><strong>Serial No.</strong></Typography></TableCell>
-                  <TableCell align="right"><Typography variant="h5" color="primary"><strong>Name</strong></Typography></TableCell>
-                  <TableCell align="right"><Typography variant="h5" color="primary"><strong>Score</strong></Typography></TableCell>
+    <div className={open?classes.root:null}>
+      <Typography variant="h3" color="primary">
+        Leaderboard(Based on daily login count)
+      </Typography>
+      <br />
+      <TableContainer component={Paper}>
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow className={classes.tableRow}>
+              <TableCell>
+                <WhiteTextTypography variant="h5" color="common.white">
+                  <strong>Rank</strong>
+                </WhiteTextTypography>
+              </TableCell>
+              <TableCell align="right">
+                <WhiteTextTypography variant="h5" color="primary">
+                  <strong>Name</strong>
+                </WhiteTextTypography>
+              </TableCell>
+              <TableCell align="right">
+                <WhiteTextTypography variant="h5" color="primary">
+                  <strong>Score</strong>
+                </WhiteTextTypography>
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {leaderboard
+              .sort((a, b) => (a.dayCount < b.dayCount ? 1 : -1))
+              .map((leaderboard, i) => (
+                <TableRow key={leaderboard._id}>
+                  <TableCell
+                    className={classes.tableCell}
+                    component="th"
+                    scope="row"
+                  >
+                    <Typography variant="h6" color="primary">
+                      {i + 1}
+                    </Typography>
+                  </TableCell>
+                  <TableCell align="right">
+                    <Typography variant="h6" color="primary">
+                      {leaderboard.name}
+                    </Typography>
+                  </TableCell>
+                  <TableCell align="right">
+                    <Typography variant="h6" color="primary">
+                      {leaderboard.dayCount}
+                    </Typography>
+                  </TableCell>
                 </TableRow>
-              </TableHead>
-              <TableBody>
-                {leaderboard.map((leaderboard, i) => (
-                  <TableRow key={leaderboard._id}>
-                      <TableCell component="th" scope="row">
-                      <Typography variant="h6" color="primary">{i}</Typography>
-                    </TableCell>
-                    <TableCell align="right">
-                    <Typography variant="h6" color="primary">{leaderboard.name}</Typography>
-                    </TableCell>
-                    <TableCell align="right"><Typography variant="h6" color="primary">{leaderboard.dayCount}</Typography></TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          </div> 
-        );
-      };
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
+  );
+};
 
 export default LeaderBoard;

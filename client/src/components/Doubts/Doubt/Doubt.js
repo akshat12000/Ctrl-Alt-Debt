@@ -31,29 +31,29 @@ const Doubt = ({ doubt, setCurrentId }, props) => {
     history.push(`/discussion/${doubt._id}`);
   };
 
-
   return (
     <div>
       <div className={classes.addpost}>
         <div className={classes.addpostarea}>
-          <Card className={classes.card} borderradius="borderradius" elevation={6}>
-            <ButtonBase component="span" name="test" className={classes.cardAction} onClick={openDoubt}>
-              <CardHeader title={doubt.question} subheader={`Asked By: ${doubt.name}`}/>
-            {/* <CardContent>
-                <Typography variant="h4"><strong>{doubt.question}</strong></Typography>
-              </CardContent>
-              <br />
-              <CardContent>
-                <div className={classes.details}>
-                <Typography variant="body1" color="textSecondary" component="p">
-                  Asked By: {doubt.name}
-                </Typography>
-                </div>
-              </CardContent> */}
+          <Card
+            className={classes.card}
+            borderradius="borderradius"
+            elevation={6}
+          >
+            <ButtonBase
+              component="span"
+              name="test"
+              className={classes.cardAction}
+              onClick={openDoubt}
+            >
+              <CardHeader
+                title={doubt.question}
+                subheader={`Asked By: ${doubt.name}`}
+              />
             </ButtonBase>
-            
+
             <CardActions>
-              {(user?.result?._id === doubt.creator) && (
+              {user?.result?._id === doubt.creator && (
                 <div>
                   <Button
                     color="primary"
@@ -63,29 +63,32 @@ const Doubt = ({ doubt, setCurrentId }, props) => {
                     <EditFilled fontSize="medium" />
                     Edit
                   </Button>
-                  </div>
+                </div>
               )}
               <div>
-                  <Button color="primary" size="small" onClick={openDoubt}>
-                    <MessageFilled fontSize="medium" />
-                    Comment
-                  </Button>
-                  </div>
-                  {(user?.result?._id === doubt.creator) && (
-              <Button
-                size="small"
-                color="secondary"
-                onClick={() => dispatch(deleteDoubt(doubt._id))}
-              >
-                <DeleteIcon fontSize="medium" /> Delete
-              </Button>
-                  )}
+                <Button color="primary" size="small" onClick={openDoubt}>
+                  <MessageFilled fontSize="medium" />
+                  Comment
+                </Button>
+              </div>
+              {user?.result?._id === doubt.creator && (
+                <Button
+                  size="small"
+                  color="secondary"
+                  onClick={() => dispatch(deleteDoubt(doubt._id))}
+                >
+                  <DeleteIcon fontSize="medium" /> Delete
+                </Button>
+              )}
             </CardActions>
-            </Card>
-            <Card className={classes.secondcard} borderradius="borderradius" elevation={6}>
+          </Card>
+          <Card
+            className={classes.secondcard}
+            borderradius="borderradius"
+            elevation={6}
+          >
             <CommentDoubt doubt={doubt} />
-            </Card>
-          
+          </Card>
         </div>
       </div>
     </div>
