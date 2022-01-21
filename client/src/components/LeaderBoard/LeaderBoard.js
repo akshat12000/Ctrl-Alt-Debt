@@ -52,9 +52,13 @@ const LeaderBoard = () => {
   return (
     <div className={open?classes.root:null}>
       <Typography variant="h3" color="primary">
-        Leaderboard(Based on daily login count)
+        Leaderboard
       </Typography>
-      <br />
+      <br/>
+      <Typography variant="h4" color="primary">
+      Based on daily login count and number of doubts answered
+      </Typography>
+      <br/>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>

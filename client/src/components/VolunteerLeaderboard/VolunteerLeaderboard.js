@@ -52,8 +52,11 @@ const VolunteerLeaderBoard = () => {
   return (
     <div className={open?classes.root:null}>
       <Typography variant="h3" color="primary">
-        Volunteer Leaderboard<br/>
-        (Based on number of sessions taken and number of blogs posted)
+        Volunteer Leaderboard
+        </Typography>
+        <br/>
+        <Typography variant="h4" color="primary">
+        Based on number of sessions taken and number of blogs posted
       </Typography>
       <br />
       <TableContainer component={Paper}>

@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 
 import Discussion from '../models/discussion.js';
+import student from '../models/student.js';
 
 const router = express.Router();
 
@@ -73,9 +74,28 @@ export const commentDoubt = async (req, res) => {
 
     const doubt = await Discussion.findById(id);
     console.log(value);
-    console.log(req.userId);
 
     doubt.comments.push(value);
+    let str="";
+    for(let i=0;i<value.length;i++){
+        if(value[i]==':'){
+            break;
+        }
+        str=str+value[i];
+    }
+    
+    student.find({ name: str}, function (err, docs) {
+        if (err){
+            console.log(err);
+        }
+        else{
+            console.log(docs[0].dayCount);
+            let val=docs[0].dayCount;
+            docs[0].dayCount=val+1;
+            console.log(docs[0].dayCount);
+            docs[0].save();
+        }
+    });
 
     const updatedDoubt = await Discussion.findByIdAndUpdate(id, doubt, { new: true });
 
