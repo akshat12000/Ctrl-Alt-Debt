@@ -21,8 +21,8 @@ const useStyles = makeStyles({
     width: "5%",
   },
   centered:{
-    marginLeft:"1%",
-    width: "50%",
+    marginLeft:"15%",
+    width: "80%",
 }
 });
 

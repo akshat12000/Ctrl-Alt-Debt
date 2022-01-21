@@ -27,7 +27,7 @@ const Home = () => {
       className={open ? classes.root : null}
     >
       <Grid item xs={6}>
-          <Carousel width={"50%"} className={classes.centered} autoPlay={true}>
+          <Carousel width={"100%"} className={classes.centered} autoPlay={true}>
             <Paper>
               <img src={require("../../images/Available_Timings.png")} />
               <p className="legend">Available Timings</p>
