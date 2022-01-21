@@ -8,6 +8,6 @@ export default makeStyles((theme)=>({
         marginLeft: drawerWidth,
     },
     centered:{
-        marginLeft:"15%"
+        marginLeft:"1%"
     }
 }))

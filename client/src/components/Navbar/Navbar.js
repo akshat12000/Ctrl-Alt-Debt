@@ -15,8 +15,8 @@ const Navbar = () => {
     const location = useLocation();
     const history = useHistory();
     const classes = useStyles();
-    const volunteerLinks = ["/volunteer/availableTimings","/volunteer/myMeetings","/discussion","/blogs"];
-    const studentLinks = ["/student/bookMeeting","/student/myBookings","/discussion","/blogs","/leaderboard", "/resources"];
+    const volunteerLinks = ["/volunteer/availableTimings","/volunteer/myMeetings","/discussion","/blogs", "/volunteerLeaderboard"];
+    const studentLinks = ["/student/bookMeeting","/student/myBookings","/discussion","/blogs","/leaderboard", "/resources", "/volunteerLeaderboard"];
     const open = useSelector((state)=>state.open);
     const logout = () => {
         dispatch({ type: actionType.LOGOUT });

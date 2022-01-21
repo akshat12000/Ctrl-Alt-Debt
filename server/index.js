@@ -9,7 +9,7 @@ import bookingRouter from "./routes/booking.js";
 import blogsRouter from './routes/blogs.js';
 import discussionRoutes from "./routes/doubts.js";
 import leaderboardRouter from "./routes/leaderboard.js";
-
+import volunteerLeaderboardRouter from "./routes/volunteerLeaderboard.js";
 
 const app = express();
 dotenv.config();
@@ -23,6 +23,7 @@ app.use("/user", userRouter);
 app.use("/discussion", discussionRoutes);
 app.use("/booking", bookingRouter);
 app.use("/leaderboard", leaderboardRouter);
+app.use("/volunteerLeaderboard",volunteerLeaderboardRouter);
 
 const PORT = process.env.PORT|| 5000;
 
