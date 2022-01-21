@@ -1,4 +1,5 @@
 import blog from '../models/blog.js';
+import volunteer from '../models/volunteer.js';
 
 export const getBlogs = async (req,res)=>{
     try {
@@ -19,6 +20,8 @@ export const postBlogs = async (req,res)=>{
             subject: req.body.subject,
             creator:req.body.creator
         });
+        const id =req.body.creator.id;
+        await volunteer.findByIdAndUpdate(id,{$inc:{score:1}})
         Blog.save()
         .then(result=>{
             res.status(200).json(result)
