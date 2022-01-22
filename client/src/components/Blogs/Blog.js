@@ -10,8 +10,10 @@ import Updateblogs from './Updateblogs';
 import { useDispatch } from 'react-redux';
 import { deleteBlogs, likeBlogs } from '../../actions/blog';
 import { Redirect } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function Blog({blog,id,name}) {
+    const {t,i18n}=useTranslation();
     const classes = useStyles();
     const blogUpList=blog.upvoteList;
     const [liked,setLiked]=useState(blogUpList?(blogUpList.includes(id)?true:false):false);
@@ -84,9 +86,9 @@ function Blog({blog,id,name}) {
                 <CardActions>
                     <Button size="small" onClick={()=>upvote()} style={{color:"#3278fa"}}>
                         {!liked?<ThumbUpOutlinedIcon/>:<ThumbUpAltIcon/>}&nbsp;
-                        Upvote&nbsp;{blog.upvotes}
+                        {t("Upvote")}&nbsp;{blog.upvotes}
                     </Button>
-                    <Button size="small" onClick={()=>readMore()}>Read More</Button>
+                    <Button size="small" onClick={()=>readMore()}>{t("Read More")}</Button>
                     <ReadMoreBlog opening={opening} readMore={readMore} blog={blog} classes={classes}/>
                     <Updateblogs opening={updateOpen} handleUpdate={handleUpdate} blog={blog} classes={classes}/>
                 </CardActions>

@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import moment from "moment";
 import { Grid } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import { useTranslation } from 'react-i18next';
 const drawerWidth=240;
 const useStyles = makeStyles({
     root: {
@@ -34,6 +35,7 @@ const useStyles = makeStyles({
 
 
 const MyBookings = () => {
+    const {t,i18n} = useTranslation();
     const [bookings, setBookings] = useState([]);
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const classes = useStyles();
@@ -52,7 +54,7 @@ const MyBookings = () => {
 
     return (
         <div className={open?classes.goal:null}>
-            <Typography variant="h3" style={{textAlign:"center"}} gutterBottom>My Bookings</Typography>
+            <Typography variant="h3" style={{textAlign:"center"}} gutterBottom>{t("My Bookings")}</Typography>
                 <div style={{display:"flex",flexWrap:"wrap",flexBasis:"25%",width:"100%"}}>
                 {bookings.map(booking => {
                     return (
@@ -70,7 +72,7 @@ const MyBookings = () => {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Button size="small" variant="contained" color="secondary">Meet Link</Button>
+                                    <Button size="small" variant="contained" color="secondary">{t("Meet Link")}</Button>
                                 </CardActions>
                             </Card>
                             

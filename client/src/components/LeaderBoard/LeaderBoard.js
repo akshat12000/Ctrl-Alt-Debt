@@ -11,6 +11,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
+import { useTranslation } from 'react-i18next';
 
 const drawerWidth = 240;
 
@@ -38,6 +39,7 @@ const WhiteTextTypography = withStyles({
 
 const LeaderBoard = () => {
   const open = useSelector((state) => state.open);
+  const {t,i18n} = useTranslation();
   const classes = useStyles();
   const [leaderboard, setLeaderboard] = useState([]);
   useEffect(() => {
@@ -52,7 +54,7 @@ const LeaderBoard = () => {
   return (
     <div className={open?classes.root:null}>
       <Typography variant="h3" color="primary">
-        Leaderboard(Based on daily login count)
+        {t("Leaderboard(Based on daily login count)")}
       </Typography>
       <br />
       <TableContainer component={Paper}>
@@ -61,17 +63,17 @@ const LeaderBoard = () => {
             <TableRow className={classes.tableRow}>
               <TableCell>
                 <WhiteTextTypography variant="h5" color="common.white">
-                  <strong>Rank</strong>
+                  <strong>{t("Rank")}</strong>
                 </WhiteTextTypography>
               </TableCell>
               <TableCell align="right">
                 <WhiteTextTypography variant="h5" color="primary">
-                  <strong>Name</strong>
+                  <strong>{t("Name")}</strong>
                 </WhiteTextTypography>
               </TableCell>
               <TableCell align="right">
                 <WhiteTextTypography variant="h5" color="primary">
-                  <strong>Score</strong>
+                  <strong>{t("Score")}</strong>
                 </WhiteTextTypography>
               </TableCell>
             </TableRow>

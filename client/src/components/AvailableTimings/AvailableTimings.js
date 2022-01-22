@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from 'axios';
-
+import { useTranslation } from 'react-i18next';
 import "react-datepicker/dist/react-datepicker.css";
 
 import moment from 'moment';
@@ -12,7 +12,7 @@ import {  format } from 'date-fns'
 
 
 const AvailableTimings = () => {
-
+    const {t,i18n} = useTranslation();
     const [inputList, setInputList] = useState([{ date: '', startTime: "", endTime: "" ,dates:''}]);
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const [dates, setDates] = useState([{dates:''}]);
@@ -65,7 +65,7 @@ const AvailableTimings = () => {
     return (
         <div >
 
-            <Typography variant="h5" style={{ textAlign: "center" }} gutterBottom>Submit Available timings in the week</Typography>
+            <Typography variant="h5" style={{ textAlign: "center" }} gutterBottom>{t("Submit Available timings in the week")}</Typography>
             <form onSubmit={(e) => handleSubmit(e)} style={{ width: "50%", margin: "auto", padding: "1%" }}>
             {inputList.map((x, i) => {
                return(
@@ -80,7 +80,7 @@ const AvailableTimings = () => {
                }
                } />
                 <FormControl >
-                    <InputLabel >Start Time</InputLabel>
+                    <InputLabel >{t("Start Time")}</InputLabel>
                     <Select
                         native
                         onChange={(e) =>handleInputChange(e,i)}
@@ -143,7 +143,7 @@ const AvailableTimings = () => {
                     </Select>
                 </FormControl>
                 <FormControl >
-                    <InputLabel >End Time</InputLabel>
+                    <InputLabel >{t("End Time")}</InputLabel>
                     <Select
                         native
                         onChange={(e) =>handleInputChange(e,i)}
@@ -206,7 +206,7 @@ const AvailableTimings = () => {
 
                     </Select>
                 </FormControl>
-                {inputList.length - 1 === i && <Button onClick={handleAddClick} variant="outlined" color="secondary" >Add</Button>}
+                {inputList.length - 1 === i && <Button onClick={handleAddClick} variant="outlined" color="secondary" >{t("Add")}</Button>}
                 </>
                )
             })}
@@ -214,7 +214,7 @@ const AvailableTimings = () => {
 
             
                 <div style={{ textAlign: "center" }}>
-                    <Button style={{ margin: "5px" }} type='submit' size="small" color="primary" variant="contained">Submit</Button>
+                    <Button style={{ margin: "5px" }} type='submit' size="small" color="primary" variant="contained">{t("Submit")}</Button>
                 </div>
             </form>
 

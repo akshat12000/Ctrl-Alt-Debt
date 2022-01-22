@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { AppBar, Typography, Toolbar, Avatar, Button, Drawer,List,ListItem, IconButton} from '@material-ui/core';
+import { AppBar, Typography, Toolbar, Avatar, Button, Drawer,List,ListItem, IconButton, Box, FormControl, InputLabel, Select, MenuItem} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import {useHistory, useLocation ,Link} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import decode from 'jwt-decode';
 
 import * as actionType from '../../constants/actionTypes';
@@ -11,12 +12,14 @@ import useStyles from './styles';
 
 const Navbar = () => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+    const {t,i18n} = useTranslation();
     const dispatch = useDispatch();
     const location = useLocation();
     const history = useHistory();
     const classes = useStyles();
     const volunteerLinks = ["/volunteer/availableTimings","/volunteer/myMeetings","/discussion","/blogs"];
     const studentLinks = ["/student/bookMeeting","/student/myBookings","/discussion","/blogs","/leaderboard", "/resources"];
+    const [language,setLanguage]=useState("en");
     const open = useSelector((state)=>state.open);
     const logout = () => {
         dispatch({ type: actionType.LOGOUT });
@@ -24,6 +27,12 @@ const Navbar = () => {
         dispatch({type:"UNSET"});
         setUser(null);
     };
+
+    const handleLang = (e)=>{
+        setLanguage(e.target.value);
+        i18n.changeLanguage(e.target.value);
+    }
+
     const eliminatedLinks = ["/auth","/auth/student","/auth/volunteer"];
 
     const handleDrawerOpen = ()=>{
@@ -60,19 +69,34 @@ const Navbar = () => {
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant='h5' className={classes.Header}>Gyandaan</Typography>
+                        <Typography variant='h5' className={classes.Header}>{t("Gyandaan")}</Typography>
                     </div>
                 <Toolbar className={classes.toolbar}>
                     {user?.result ? (
                         <div className={classes.profile}>
                             <Avatar className={classes.purple} alt={user?.result.name} src={user?.result.imageUrl}>{user?.result.name.charAt(0)}</Avatar>
                             <Typography className={classes.userName} variant="h6">{user?.result.name}</Typography>
-                            <Button variant="contained" className={classes.logout} color="secondary" onClick={logout}>Logout</Button>
+                            <Button variant="contained" className={classes.logout} color="secondary" onClick={logout}>{t("Logout")}</Button>
                         </div>
                     ) : (
-                        <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
+                        <Button component={Link} to="/auth" variant="contained" color="primary">{t("Sign In")}</Button>
                     )}
                 </Toolbar>
+                <Box sx={{ minWidth: 120 }}>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">{t("Language")}</InputLabel>
+                        <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={language}
+                        label="Age"
+                        onChange={handleLang}
+                        >
+                        <MenuItem value={"en"}>{t("English")}</MenuItem>
+                        <MenuItem value={"hi"}>{t("Hindi")}</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Box>
             </AppBar>
             <Drawer align="left" variant="persistent" classes={{paper:classes.paperWidth}} open={open}>
                 <div className={classes.drawerHeader}>
@@ -82,8 +106,8 @@ const Navbar = () => {
                 </div>
                 <List>
                     {user?(user.result.hasOwnProperty('classRange')?
-                    volunteerLinks.map((link)=><ListItem onClick={()=>assign(link)} button>{link.slice(1).replace("-"," ").replace("/","").replace("volunteer","").toUpperCase()}</ListItem>):
-                    studentLinks.map((link)=><ListItem onClick={()=>assign(link)} button>{link.slice(1).replace("-"," ").replace("/","").replace("student","").toUpperCase()}</ListItem>)):null}
+                    volunteerLinks.map((link)=><ListItem onClick={()=>assign(link)} button>{t(link.slice(1).replace("-"," ").replace("/","").replace("volunteer","").toUpperCase())}</ListItem>):
+                    studentLinks.map((link)=><ListItem onClick={()=>assign(link)} button>{t(link.slice(1).replace("-"," ").replace("/","").replace("student","").toUpperCase())}</ListItem>)):null}
                 </List>
             </Drawer>
         </div>

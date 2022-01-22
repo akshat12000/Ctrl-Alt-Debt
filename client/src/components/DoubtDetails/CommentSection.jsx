@@ -3,9 +3,11 @@ import { Typography, TextField, Button } from "@material-ui/core/";
 import { useDispatch } from "react-redux";
 import { commentDoubt } from "../../actions/doubts";
 import useStyles from "./styles";
+import { useTranslation } from 'react-i18next';
 
 const CommentSection = ({ doubt }) => {
   //window.location.reload();
+  const {t,i18n} = useTranslation();
   const user = JSON.parse(localStorage.getItem("profile"));
   const [comments, setComments] = useState(doubt?.comments);
   const [comment, setComment] = useState("");
@@ -34,13 +36,13 @@ const CommentSection = ({ doubt }) => {
       {user?.result?.name && (
         <div style={{ width: "90%" }}>
           <Typography gutterBottom variant="h6">
-            Write a comment
+            {t("Write a comment")}
           </Typography>
           <TextField
             fullWidth
             rows={4}
             variant="outlined"
-            label="Comment"
+            label={t("Comment")}
             multiline
             value={comment}
             onChange={(e) => setComment(e.target.value)}
@@ -54,7 +56,7 @@ const CommentSection = ({ doubt }) => {
             color="primary"
             onClick={handleComment}
           >
-            Comment
+            {t("Comment")}
           </Button>
         </div>
       )}
@@ -64,7 +66,7 @@ const CommentSection = ({ doubt }) => {
           style={{ width: "90%" }}
         >
           <Typography gutterBottom variant="h6">
-            Comments
+            {t("Comments")}
           </Typography>
           {comments?.map((c, i) => (
             <Typography key={i} gutterBottom variant="subtitle1">
