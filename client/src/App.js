@@ -16,6 +16,7 @@ import Blogs from './components/Blogs/Blogs'
 import DoubtDetails from './components/DoubtDetails/DoubtDetails'
 import Resources from './components/Resources/Resources'
 import LeaderBoard from './components/LeaderBoard/LeaderBoard'
+import Admin from './components/AdminPanel/Admin'
 
 const App = () => {
     return (
@@ -39,6 +40,7 @@ const App = () => {
                 <Route exact path="/discussion/:id" component={DoubtDetails} />
                 <Route exact path="/resources" component={Resources} /> 
                 <Route exact path="/leaderboard" component={LeaderBoard} /> 
+                <Route exact path="/admin" component={Admin} /> 
             </Switch>
         </BrowserRouter>
     )
