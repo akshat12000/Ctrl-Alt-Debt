@@ -6,10 +6,11 @@ import {useDispatch} from 'react-redux'
 import {getBlogs} from '../../actions/blog'
 import {Link,Redirect,useHistory} from 'react-router-dom';
 import { Button} from '@material-ui/core';
-
+import { useTranslation } from 'react-i18next';
 
 function Blogs() {
     const info = JSON.parse(localStorage.getItem('profile'));
+    const {t,i18n}=useTranslation();
     const id = info?info.result._id:"0";
     const name = info?info.result.name:"guest";
     const history = useHistory();
@@ -36,7 +37,7 @@ function Blogs() {
             </div> 
             {info?(info.result.hasOwnProperty('classRange')?
             <Button style={{position:"absolute",bottom:"2%",right:"2%"}} variant="contained" color="secondary" component={Link} to="/blogs/create">
-                Write a blog
+                {t("Write a blog")}
             </Button>:null):null}
         </div>
     )

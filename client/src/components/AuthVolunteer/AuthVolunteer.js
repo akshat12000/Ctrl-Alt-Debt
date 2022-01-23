@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Avatar, Button, Paper, Grid, Typography, Container, } from '@material-ui/core';
 import { useHistory, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Icon from './icon';
 import { signin, signup } from '../../actions/auth';
@@ -22,6 +23,7 @@ const initialState = { name: '', email: '', password: '', confirmPassword: '', y
 
 
 const AuthVolunteer = () => {
+    const {t,i18n} = useTranslation();
     const [form, setForm] = useState(initialState);
     const [isSignup, setIsSignup] = useState(false);
     const dispatch = useDispatch();
@@ -107,20 +109,20 @@ const AuthVolunteer = () => {
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">{isSignup ? 'Sign up' : 'Sign in'}</Typography>
+                <Typography component="h1" variant="h5">{isSignup ? t("Sign up") : t("Sign in")}</Typography>
                 <form className={classes.form} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                        
-                        <Input name="email" label="Email Address" handleChange={handleChange} type="email" />
-                        <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
-                        {isSignup && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" />}
+                        <Input name="email" label={t("Email Address")} handleChange={handleChange} type="email" />
+                        <Input name="password" label={t("Password")} handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
+                        {isSignup && <Input name="confirmPassword" label={t("Repeat Password")} handleChange={handleChange} type="password" />}
                         {isSignup && (
                             <>
-                                <Input name="name" label="Name" handleChange={handleChange} autoFocus />
+                                <Input name="name" label={t("Name")} handleChange={handleChange} autoFocus />
                             
                                
                                 <Grid item xs={12} sm={ 12}  >
-                                <Typography  variant="h5">Select classes you can teach</Typography>
+                                <Typography  variant="h5">{t("Select classes you can teach")}</Typography>
                                     <FormGroup row>
                                         <FormControlLabel control={<Checkbox checked={yearState.class1} onChange={handleYearChange} name="year1" />} label="1" />
                                         <FormControlLabel control={<Checkbox checked={yearState.class2} onChange={handleYearChange} name="year2" />} label="2" />
@@ -140,16 +142,16 @@ const AuthVolunteer = () => {
                                     </FormGroup>
                                 </Grid>
                                 <Grid item xs={12} sm={ 12}  >
-                                <Typography  variant="h5">Select subjects you can teach</Typography>
+                                <Typography  variant="h5">{t("Select subjects you can teach")}</Typography>
                                     <FormGroup row>
-                                        <FormControlLabel control={<Checkbox checked={subjectState.maths} onChange={handleSubjectChange} name="maths" />} label="Maths" />
-                                        <FormControlLabel control={<Checkbox checked={subjectState.english} onChange={handleSubjectChange} name="english" />} label="English" />
-                                        <FormControlLabel control={<Checkbox checked={subjectState.science} onChange={handleSubjectChange} name="science" />} label="Science" />
-                                        <FormControlLabel control={<Checkbox checked={subjectState.social} onChange={handleSubjectChange} name="social" />} label="Social" />
-                                        <FormControlLabel control={<Checkbox checked={subjectState.computer} onChange={handleSubjectChange} name="computer" />} label="Computer" />
-                                        <FormControlLabel control={<Checkbox checked={subjectState.physics} onChange={handleSubjectChange} name="physics" />} label="Physics" />
-                                        <FormControlLabel control={<Checkbox checked={subjectState.chemistry} onChange={handleSubjectChange} name="chemistry" />} label="Chemistry" />
-                                        <FormControlLabel control={<Checkbox checked={subjectState.biology} onChange={handleSubjectChange} name="biology" />} label="Biology" />
+                                        <FormControlLabel control={<Checkbox checked={subjectState.maths} onChange={handleSubjectChange} name="maths" />} label={t("Maths")} />
+                                        <FormControlLabel control={<Checkbox checked={subjectState.english} onChange={handleSubjectChange} name="english" />} label={t("English")} />
+                                        <FormControlLabel control={<Checkbox checked={subjectState.science} onChange={handleSubjectChange} name="science" />} label={t("Science")} />
+                                        <FormControlLabel control={<Checkbox checked={subjectState.social} onChange={handleSubjectChange} name="social" />} label={`${t("Social")} ${t("Science")}`} />
+                                        <FormControlLabel control={<Checkbox checked={subjectState.computer} onChange={handleSubjectChange} name="computer" />} label={t("Computer")} />
+                                        <FormControlLabel control={<Checkbox checked={subjectState.physics} onChange={handleSubjectChange} name="physics" />} label={t("Physics")} />
+                                        <FormControlLabel control={<Checkbox checked={subjectState.chemistry} onChange={handleSubjectChange} name="chemistry" />} label={t("Chemistry")} />
+                                        <FormControlLabel control={<Checkbox checked={subjectState.biology} onChange={handleSubjectChange} name="biology" />} label={t("Biology")} />
                                         
 
                                     </FormGroup>
@@ -159,12 +161,12 @@ const AuthVolunteer = () => {
                        
                     </Grid>
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-                        {isSignup ? 'Sign Up' : 'Sign In'}
+                        {isSignup ? t("Sign Up") : t("Sign In")}
                     </Button>
                     <Grid container justifyContent="flex-end">
                         <Grid item>
                             <Button onClick={switchMode}>
-                                {isSignup ? 'Already have an account? Sign in' : "Don't have an account? Sign Up"}
+                                {isSignup ? t("Already have an account? Sign in") : t("Don't have an account? Sign Up")}
                             </Button>
                         </Grid>
                     </Grid>

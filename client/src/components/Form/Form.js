@@ -4,12 +4,14 @@ import { TextField, Button, Card } from "@material-ui/core";
 import { createDoubt, updateDoubt } from "../../actions/doubts";
 import { useHistory } from "react-router-dom";
 import useStyles from "./styles";
+import { useTranslation } from 'react-i18next';
 
 const Form = ({ currentId, setCurrentId }) => {
   //const [showForm, setShowForm] = useState(false);
   //const [showButton, setShowButton] = useState(true);
   const user = JSON.parse(localStorage.getItem("profile"));
   const id = user?user.result._id:"0";
+  const {t,i18n} = useTranslation();
   const [doubtData, setDoubtData] = useState({ name: "", question: "", creator: id});
   const classes = useStyles();
   console.log(doubtData.creator);
@@ -64,13 +66,13 @@ const Form = ({ currentId, setCurrentId }) => {
           </Button>
         </Box>
       )} */}
-      <h1>Ask your doubt?</h1>
+      <h1>{t("Ask your doubt?")}</h1>
         <form autoComplete="off" noValidate onSubmit={handleSubmit}>
           <TextField
             name="name"
             spacing={5}
             variant="outlined"
-            label="What's your name?"
+            label={t("What's your name?")}
             fullWidth
             value={doubtData.name}
             onChange={(e) =>
@@ -83,7 +85,7 @@ const Form = ({ currentId, setCurrentId }) => {
             name="question"
             spacing={5}
             variant="outlined"
-            label="Ask a question"
+            label={t("Ask a question")}
             fullWidth
             multiline
             rows={4}
@@ -100,7 +102,7 @@ const Form = ({ currentId, setCurrentId }) => {
             size="small"
             type="submit"
           >
-            Ask
+            {t("Ask")}
           </Button>
           <Button
             variant="contained"
@@ -109,7 +111,7 @@ const Form = ({ currentId, setCurrentId }) => {
             size="small"
             onClick={clear}
           >
-            Cancel
+            {t("Cancel")}
           </Button>
         </form>
      

@@ -1,14 +1,14 @@
 import React from "react";
 import { Grid, CircularProgress } from "@material-ui/core";
 import { useSelector } from "react-redux";
-
+import { useTranslation } from 'react-i18next';
 import Doubt from "./Doubt/Doubt";
 
 const Doubts = ({ setCurrentId }) => {
   const { doubts, isLoading } = useSelector((state) => state.doubts);
+  const {t,i18n} = useTranslation();
 
-
-  if (!doubts.length && !isLoading) return <h1>No Doubts</h1>;
+  if (!doubts.length && !isLoading) return <h1>{t("No Doubts")}</h1>;
 
   return isLoading ? (
     <CircularProgress />

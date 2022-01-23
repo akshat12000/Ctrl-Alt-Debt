@@ -11,6 +11,7 @@ import {
   CardHeader,
 } from "@material-ui/core/";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
+import { useTranslation } from 'react-i18next';
 import { EditFilled } from "@ant-design/icons";
 import { MessageFilled } from "@ant-design/icons";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -22,6 +23,7 @@ import useStyles from "./styles";
 import CommentDoubt from "../../DoubtDetails/CommentDoubt";
 
 const Doubt = ({ doubt, setCurrentId }, props) => {
+  const {t,i18n} = useTranslation();
   const user = JSON.parse(localStorage.getItem("profile"));
   const dispatch = useDispatch();
   const history = useHistory();
@@ -48,7 +50,7 @@ const Doubt = ({ doubt, setCurrentId }, props) => {
             >
               <CardHeader
                 title={doubt.question}
-                subheader={`Asked By: ${doubt.name}`}
+                subheader={`${t("Asked by")}: ${doubt.name}`}
               />
             </ButtonBase>
 
@@ -61,14 +63,14 @@ const Doubt = ({ doubt, setCurrentId }, props) => {
                     onClick={() => setCurrentId(doubt._id)}
                   >
                     <EditFilled fontSize="medium" />
-                    Edit
+                    {t("Edit")}
                   </Button>
                 </div>
               )}
               <div>
                 <Button color="primary" size="small" onClick={openDoubt}>
                   <MessageFilled fontSize="medium" />
-                  Comment
+                  {t("Comment")}
                 </Button>
               </div>
               {user?.result?._id === doubt.creator && (
@@ -77,7 +79,7 @@ const Doubt = ({ doubt, setCurrentId }, props) => {
                   color="secondary"
                   onClick={() => dispatch(deleteDoubt(doubt._id))}
                 >
-                  <DeleteIcon fontSize="medium" /> Delete
+                  <DeleteIcon fontSize="medium" /> {t("Delete")}
                 </Button>
               )}
             </CardActions>

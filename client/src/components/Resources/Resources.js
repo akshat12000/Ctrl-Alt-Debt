@@ -2,9 +2,11 @@ import React from "react";
 import { Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import useStyles from './styles'
+import { useTranslation } from 'react-i18next'
 
 const Resources = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
+  const {t,i18n} = useTranslation();
   console.log(user?.result.year);
   const userYear = user?.result.year;
   const classes=useStyles();
@@ -15,22 +17,20 @@ const Resources = () => {
       {user ? (
         user.result.hasOwnProperty("classRange") ? (
           <Typography variant="h1" style={{ textAlign: "center" }}>
-            <strong>Resources are available only for students</strong>
+            <strong>{t("Resources are available only for students")}</strong>
           </Typography>
         ) : (
           <div>
             <Typography variant="h2" style={{ textAlign: "center" }}>
-              <strong>Resources</strong>
+              <strong>{t("Resources")}</strong>
             </Typography>
             <br />
             <Typography variant="h4" style={{ textAlign: "center" }}>
-              Below are the folders which contains PDFs of NCERT books of
-              different subjects in class {userYear}
+              {t(`Below are the folders which contains PDFs of NCERT books of different subjects in class ${userYear}`)}
             </Typography>
             <br />
             <Typography variant="h5" style={{ textAlign: "center" }}>
-              You can refer to these books to get in-depth knowledge about the
-              subjects anytime
+              {t("You can refer to these books to get in-depth knowledge about the subjects anytime")}
             </Typography>
             <br />
             {userYear == 1 ? (

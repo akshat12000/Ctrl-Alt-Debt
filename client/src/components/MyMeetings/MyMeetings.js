@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import moment from "moment";
 import { Grid } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import { useTranslation } from 'react-i18next';
 
 const drawerWidth=240;
 const useStyles = makeStyles({
@@ -38,6 +39,7 @@ const MyMeetings = () => {
     const [bookings, setBookings] = useState([]);
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const classes = useStyles();
+    const {t,i18n} = useTranslation();
     const open=useSelector((state)=>state.open);
     
     const handleCancel = async (bookingId) => {
@@ -67,7 +69,7 @@ const MyMeetings = () => {
 
     return (
         <div className={open?classes.goal:null}>
-            <Typography variant="h3" style={{textAlign:"center"}}>My Meetings</Typography>
+            <Typography variant="h3" style={{textAlign:"center"}}>{t("My Meetings")}</Typography>
             
                 <div style={{display:"flex",flexWrap:"wrap",flexBasis:"25%",width:"100%"}}>
                 {bookings.map(booking => {
@@ -86,8 +88,8 @@ const MyMeetings = () => {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Button size="small">Meet Link</Button>
-                                    <Button size="small" onClick={handleCancel(booking._id)}>Cancel</Button>
+                                    <Button size="small">{t("Meet Link")}</Button>
+                                    <Button size="small" onClick={handleCancel(booking._id)}>{t("Cancel")}</Button>
                                 </CardActions>
                                
                             </Card>
