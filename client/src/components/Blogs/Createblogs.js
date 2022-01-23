@@ -40,7 +40,7 @@ function Createblogs() {
     }
     return (
         <div className={open?classes.root:null}>
-            <Typography variant="h5" style={{textAlign:"center"}} gutterBottom>{t("Create a Blog")}</Typography>
+            {info.result.hasOwnProperty('classRange')?<div><Typography variant="h5" style={{textAlign:"center"}} gutterBottom>{t("Create a Blog")}</Typography>
             <form onSubmit={(e)=>handleSubmit(e)} style={{width:"50%" ,margin:"auto",padding:"1%"}}>
                 <TextField style={{margin:"10px"}} type="text" name="title" onChange={(e)=>setBlog({...blog,title:e.target.value})} value={blog.title} placeholder={t("Title")} fullWidth/><br/>
                 <TextField style={{margin:"10px"}} type="text" name="body" onChange={(e)=>setBlog({...blog,body:e.target.value})} value={blog.body} placeholder={t("Body")} multiline fullWidth rows={4}/><br/>
@@ -49,7 +49,7 @@ function Createblogs() {
                 <div style={{textAlign:"center"}}>
                     <Button style={{margin:"5px"}} type='submit' size="small" color="primary" variant="contained">{t("Submit")}</Button>
                 </div>
-            </form>     
+            </form></div>:<Typography variant='h4' style={{textAlign:"center"}}>{t("Only Volunteers can write blogs")}</Typography>}     
         </div>
     )
 }

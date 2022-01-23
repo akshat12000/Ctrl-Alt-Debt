@@ -9,12 +9,13 @@ function MyApp() {
     enqueueSnackbar(t("Daily Login +5 points!!"), { variant });
   };
   
-  const info = JSON.parse(localStorage.getItem('profile'));
-  console.log(info);
+  let info = JSON.parse(localStorage.getItem('profile'));
 
   useEffect(()=>{
       if(info&&info.message==="first"){
           handleClickVariant("success");
+          info={...info,message:"second"};
+          localStorage.setItem('profile',JSON.stringify(info));
       }
   },[localStorage.getItem('profile')]);
 

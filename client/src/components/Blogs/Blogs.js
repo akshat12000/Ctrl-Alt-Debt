@@ -5,7 +5,7 @@ import useStyles from './styles'
 import {useDispatch} from 'react-redux'
 import {getBlogs} from '../../actions/blog'
 import {Link,Redirect,useHistory} from 'react-router-dom';
-import { Button} from '@material-ui/core';
+import { Button, Typography} from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
 function Blogs() {
@@ -30,10 +30,11 @@ function Blogs() {
  
     return (
         <div>
+           
             <div className={open?classes.root:null} style={{display:"flex",flexWrap:"wrap"}}>
-                {blogs.map((blog)=>
+            {blogs.length?blogs.map((blog)=>
                     <Blog key={blog._id} blog={blog} id={id} name={name}/>
-                )}
+                ):<Typography variant='h4' style={{textAlign:"center"}}>{t("No Blogs yet!")}</Typography>}
             </div> 
             {info?(info.result.hasOwnProperty('classRange')?
             <Button style={{position:"absolute",bottom:"2%",right:"2%"}} variant="contained" color="secondary" component={Link} to="/blogs/create">
