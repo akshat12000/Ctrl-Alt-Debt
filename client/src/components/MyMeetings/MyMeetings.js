@@ -60,7 +60,7 @@ const MyMeetings = () => {
 
         const kings = await axios.post('http://localhost:5000/booking/cancelBooking', { bookingId: bookingId });
         setBookings(kings.data);
-        alert("Booking Cancelled");
+        alert(t("Booking Cancelled"));
 
 
     }
@@ -71,7 +71,7 @@ const MyMeetings = () => {
 
         const kings = await axios.post('http://localhost:5000/booking/removeBooking', { bookingId: bookingId });
         setBookings(kings.data);
-        alert("Meeting Completed");
+        alert(t("Meeting Completed"));
     }
 
     useEffect(() => {
@@ -102,14 +102,14 @@ const MyMeetings = () => {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <a target="_blank" href={booking.meetLink}>Meet Link</a>
+                                    <Button variant="contained" color="secondary"><a style={{color:"white",textDecoration:"none"}} target="_blank" href={booking.meetLink}>{t("Meet Link")}</a></Button>
                                     <form onSubmit={handleCancel}>
                                         <input type="hidden" name="bookingId" value={booking._id} />
                                         <Button type="submit" size="small">{t("Cancel")}</Button>
                                     </form>
                                     <form onSubmit={handleRemove}>
                                         <input type="hidden" name="bookingId" value={booking._id} />
-                                        <Button type="submit" size="small">Completed</Button>
+                                        <Button type="submit" size="small">{t("Completed")}</Button>
                                     </form>
 
                                 </CardActions>

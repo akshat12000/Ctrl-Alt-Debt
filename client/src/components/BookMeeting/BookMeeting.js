@@ -14,6 +14,7 @@ const initialState = { subject: '', description: '',year:'',language:'' };
 
 const BookMeeting = () => {
     const [form, setForm] = useState(initialState);
+    
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const [slots, setSlots] = useState([]);
     const {t,i18n} = useTranslation();
@@ -66,7 +67,7 @@ const BookMeeting = () => {
                     <form className={classes.form} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                         <FormControl >
-                            <InputLabel >Subject</InputLabel>
+                            <InputLabel >{t("Subject")}</InputLabel>
                             <Select
                                 native
                                 value={form.subject}
@@ -76,14 +77,14 @@ const BookMeeting = () => {
                                 }}
                             >
                                 <option aria-label="None" value="" />
-                                <option value='maths'>Maths</option>
-                                <option value='english'>English</option>
-                                <option value='science'>Science</option>
-                                <option value='social'>Social</option>
-                                <option value='computer'>Computer</option>
-                                <option value='physics'>Physics</option>
-                                <option value='chemistry'>Chemistry</option>
-                                <option value='biology'>Biology</option>
+                                <option value='maths'>{t("Maths")}</option>
+                                <option value='english'>{t("English")}</option>
+                                <option value='science'>{t("Science")}</option>
+                                <option value='social'>{t("Social")+" "+t("Science")}</option>
+                                <option value='computer'>{t("Computer")}</option>
+                                <option value='physics'>{t("Physics")}</option>
+                                <option value='chemistry'>{t("Chemistry")}</option>
+                                <option value='biology'>{t("Biology")}</option>
 
                                 
                                
@@ -91,7 +92,7 @@ const BookMeeting = () => {
                             </Select>
                         </FormControl>
                         <FormControl >
-                            <InputLabel >Language</InputLabel>
+                            <InputLabel >{t("Language")}</InputLabel>
                             <Select
                                 native
                                 value={form.language}
@@ -101,16 +102,16 @@ const BookMeeting = () => {
                                 }}
                             >
                                 <option aria-label="None" value="" />
-                                <option value='english'>English</option>
-                                <option value='hindi'>Hindi</option>
-                                <option value='gujarati'>Gujarati</option>
-                                <option value='bengali'>Bengali</option>
-                                <option value='marathi'>Marathi</option>
-                                <option value='tamil'>Tamil</option>
-                                <option value='telugu'>Telugu</option>
-                                <option value='kannada'>Kannada</option>
-                                <option value='malayalam'>Malayalam</option>
-                                <option value='punjabi'>Punjabi</option>
+                                <option value='english'>{t("English")}</option>
+                                <option value='hindi'>{t("Hindi")}</option>
+                                <option value='gujarati'>{t("Gujarati")}</option>
+                                <option value='bengali'>{t("Bengali")}</option>
+                                <option value='marathi'>{t("Marathi")}</option>
+                                <option value='tamil'>{t("Tamil")}</option>
+                                <option value='telugu'>{t("Telugu")}</option>
+                                <option value='kannada'>{t("Kannada")}</option>
+                                <option value='malayalam'>{t("Malayalam")}</option>
+                                <option value='punjabi'>{t("Punjabi")}</option>
 
                                 
                                
@@ -118,11 +119,11 @@ const BookMeeting = () => {
                             </Select>
                         </FormControl>
 
-                        <Input name="description" label="Description" value={form.description} handleChange={handleChange} />
+                        <Input name="description" label={t("Description")} value={form.description} handleChange={handleChange} />
 
                     </Grid>
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-                        Get Slots
+                        {t("Get Slots")}
                     </Button>
                    
                         {isSlots && <div>

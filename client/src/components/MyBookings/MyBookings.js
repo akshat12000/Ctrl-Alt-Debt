@@ -160,21 +160,21 @@ const MyBookings = () => {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    {booking.status != "cancelled" && <a target="_blank" href={booking.meetLink}>{t("Meet Link")}</a>}
+                                    {booking.status != "cancelled" && <Button variant="contained" color="secondary"><a style={{textDecoration:"none",color:"white"}} target="_blank" href={booking.meetLink}>{t("Meet Link")}</a></Button>}
                                     {booking.status == "cancelled" &&
                                         <div>
-                                            <div style={{ color: 'red' }}>cancelled</div>
+                                            <div style={{ color: 'red' }}>{t("Canceled")}</div>
                                             <form onSubmit={handleCancel}>
                                                 <input type="hidden" name="bookingId" value={booking._id} />
-                                                <Button type="submit" size="small">Remove</Button>
+                                                <Button type="submit" size="small">{t("Remove")}</Button>
                                             </form>
                                         </div>}
                                         {booking.status == "completed" &&
                                         <div>
-                                            <div style={{ color: 'red' }}>completed</div>
+                                            <div style={{ color: 'red' }}>{t("Completed")}</div>
                                             <form onSubmit={handleCancel}>
                                                 <input type="hidden" name="bookingId" value={booking._id} />
-                                                <Button type="submit" size="small">Remove</Button>
+                                                <Button type="submit" size="small">{t("Remove")}</Button>
                                             </form>
                                         </div>}
                                     <IconButton
@@ -200,7 +200,7 @@ const MyBookings = () => {
                                     >
                                         {options.map((option) => (
                                             <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
-                                                {option}
+                                                {t(option)}
                                             </MenuItem>
                                         ))}
                                     </Menu>
@@ -219,8 +219,8 @@ const MyBookings = () => {
                                         <input type="hidden" name="volunteerId" value={booking.volunteerId} />
                                         <input type="hidden" name="studentId" value={booking.studentId} />
                                         
-                                        <TextField style={{margin:"7px"}}  variant="standard" placeholder='Complaint' label="Complaint" fullWidth/><br/>
-                                        <Button style={{margin:"5px"}} size="small" type="submit" variant='outlined' color="primary">Submit</Button>
+                                        <TextField style={{margin:"7px"}}  variant="standard" placeholder={t("Complaint")} label={t("Complaint")} fullWidth/><br/>
+                                        <Button style={{margin:"5px"}} size="small" type="submit" variant='outlined' color="primary">{t("Submit")}</Button>
                                         </form>
                                         </Box>
                                 </Modal>
