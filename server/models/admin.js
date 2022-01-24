@@ -7,5 +7,5 @@ const adminSchema = mongoose.Schema({
   userType: { type: String, required: true },
 });
 
-const admin = mongoose.model("student", adminSchema);
+const admin = mongoose.model("admin", adminSchema);
 export default admin;

@@ -20,6 +20,7 @@ import VolunteerLeaderboard from './components/VolunteerLeaderboard/VolunteerLea
 import Admin from './components/AdminPanel/Admin'
 import { useDispatch } from "react-redux";
 import { getMeetings } from "./actions/meetings";
+import AuthAdmin from './components/AuthAdmin/AuthAdmin'
 
 
 const App = () => {
@@ -47,6 +48,7 @@ const App = () => {
                 <Route exact path="/resources" component={Resources} /> 
                 <Route exact path="/leaderboard" component={LeaderBoard} /> 
                 <Route exact path="/volunteerLeaderboard" component={VolunteerLeaderboard} />
+                <Route exact path="/auth/admin" component={AuthAdmin} />  
                 <Route exact path="/admin" component={Admin} /> 
             </Switch>
         </BrowserRouter>

@@ -12,17 +12,30 @@ import React from "react";
 import { useSelector } from "react-redux";
 import useStyles from "./styles";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
+import {useEffect,useState} from 'react';
 
 function Admin() {
   const open = useSelector((state) => state.open);
   const { t, i18n } = useTranslation();
-  const infos = [
-    {
-      volunteer: "Munish",
-      student: "Akshat",
-      complain: "Taking Short classes",
-    },
-  ]; // sample data
+  const [data, setData] = useState([]);
+
+  
+  useEffect(() => {
+
+    const getComplaints = async () => {
+      try {
+          const infos  = await axios.get("http://localhost:5000/complaint");
+          setData(infos.data);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getComplaints();
+  }, []);
+
+  // sample data
   const classes = useStyles();
   return (
     <div className={open ? classes.root : null}>
@@ -35,10 +48,13 @@ function Admin() {
             <TableRow style={{ backgroundColor: "#3f51b5" }}>
               <TableCell style={{ color: "white" }}>{t("S.No.")}</TableCell>
               <TableCell style={{ color: "white" }} align="right">
-                {t("Volunteer Name")}
+                {t("Booking Id")}
               </TableCell>
               <TableCell style={{ color: "white" }} align="right">
-                {t("Student Name")}
+                {t("Volunteer Id")}
+              </TableCell>
+              <TableCell style={{ color: "white" }} align="right">
+                {t("Student Id")}
               </TableCell>
               <TableCell style={{ color: "white" }} align="right">
                 {t("Complain")}
@@ -46,16 +62,18 @@ function Admin() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {infos.map((data, ind) => (
-              <TableRow key={data.name}>
+          {data.map((data, ind) => (
+              <TableRow >
                 <TableCell component="th" scope="row">
                   {ind + 1}
                 </TableCell>
-                <TableCell align="right">{data.volunteer}</TableCell>
-                <TableCell align="right">{data.student}</TableCell>
-                <TableCell align="right">{data.complain}</TableCell>
+                <TableCell align="right">{data.bookingId}</TableCell>
+                <TableCell align="right">{data.volunteerId}</TableCell>
+                <TableCell align="right">{data.studentId}</TableCell>
+                <TableCell align="right">{data.description}</TableCell>
               </TableRow>
             ))}
+               
           </TableBody>
         </Table>
       </TableContainer>

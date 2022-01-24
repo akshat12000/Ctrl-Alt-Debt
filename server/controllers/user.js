@@ -4,6 +4,7 @@ import dailyLogin from "../models/dailyLogin.js";
 
 import student from "../models/student.js";
 import volunteer from "../models/volunteer.js";
+import admin from "../models/admin.js";
 
 const secret = 'test';
 
@@ -43,7 +44,7 @@ export const signin = async (req, res) => {
         res.status(200).json({ result: oldUser, token,message:"second" });
       }
     }
-    else{
+    else if (userType === "volunteer") {
       const oldUser = await volunteer.findOne({ email });
 
       if (!oldUser) return res.status(404).json({ message: "User doesn't exist" });
@@ -56,6 +57,20 @@ export const signin = async (req, res) => {
   
       res.status(200).json({ result: oldUser, token });
 
+    }
+    else
+    {
+      const oldUser = await admin.findOne({ email });
+
+      if (!oldUser) return res.status(404).json({ message: "User doesn't exist" });
+  
+      const isPasswordCorrect = (password==oldUser.password);
+  
+      if (!isPasswordCorrect) return res.status(400).json({ message: "Invalid credentials" });
+  
+      const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, secret, { expiresIn: "1h" });
+  
+      res.status(200).json({ result: oldUser, token });
     }
    
   } catch (err) {

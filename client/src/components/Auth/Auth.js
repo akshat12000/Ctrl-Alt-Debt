@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import { purple } from "@material-ui/core/colors";
 import { withStyles } from "@material-ui/styles";
 import { ThemeProvider } from "@material-ui/core";
+import axios from "axios";
+import { useEffect } from "react";
 const ColorButton = withStyles((theme) => ({
   root: {
     color: theme.palette.getContrastText(purple[500]),
@@ -22,7 +24,11 @@ const theme = createTheme({
 });
 
 const Auth = () => {
+
+
   const { t, i18n } = useTranslation();
+
+
   return (
     <div
       style={{
