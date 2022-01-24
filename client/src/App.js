@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import Home from './components/Home/Home'
 import AuthStudent from './components/AuthStudent/AuthStudent'
@@ -18,8 +18,13 @@ import Resources from './components/Resources/Resources'
 import LeaderBoard from './components/LeaderBoard/LeaderBoard'
 import VolunteerLeaderboard from './components/VolunteerLeaderboard/VolunteerLeaderboard'
 import Admin from './components/AdminPanel/Admin'
+import { useDispatch } from "react-redux";
+import { getMeetings } from "./actions/meetings";
+
 
 const App = () => {
+
+
     return (
         <BrowserRouter>
             <Navbar/>

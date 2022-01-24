@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useDebugValue } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -8,8 +8,11 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import moment from "moment";
 import { Grid } from "@material-ui/core";
-import { useSelector } from "react-redux";
 import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { getMeetings } from "../../actions/meetings";
 
 const drawerWidth=240;
 const useStyles = makeStyles({
@@ -35,6 +38,9 @@ const useStyles = makeStyles({
 
 
 
+
+
+
 const MyMeetings = () => {
     const [bookings, setBookings] = useState([]);
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -42,29 +48,35 @@ const MyMeetings = () => {
     const {t,i18n} = useTranslation();
     const open=useSelector((state)=>state.open);
     
-    const handleCancel = async (bookingId) => {
-        console.log(bookingId);
-        // const res = await axios.post(`http://localhost:5000/booking/cancelBooking?bookingId=${bookingId}`);
-        // console.log(res);
-        // const newBookings = bookings.filter(booking => booking._id !== bookingId);
-        // setBookings(newBookings);
+
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const meetings=useSelector((state)=>state.meetings);
+
+    const handleCancel = async (e) => {
+        e.preventDefault();
+        const bookingId = e.target[0].value;
+
+
+        const kings = await axios.post('http://localhost:5000/booking/cancelBooking', { bookingId: bookingId });
+        setBookings(kings.data);
+        alert("Booking Cancelled");
+
+
     }
+    const handleRemove = async (e) => {
+        e.preventDefault();
+        const bookingId = e.target[0].value;
 
 
-    
-
+        const kings = await axios.post('http://localhost:5000/booking/removeBooking', { bookingId: bookingId });
+        setBookings(kings.data);
+        alert("Meeting Completed");
+    }
 
     useEffect(() => {
-        const getBookings = async () => {
-            const bookings = await axios.get(`http://localhost:5000/booking/getVolunteerBookings?userId=${user.result._id}`);
-    
-            setBookings(bookings.data);
-        }
-
-       
-        getBookings();
-    }
-        , [user.result._id])
+        dispatch(getMeetings(user.result._id));
+    }, [dispatch]);
 
 
     return (
@@ -75,11 +87,11 @@ const MyMeetings = () => {
                 {bookings.map(booking => {
                     return (
                         <>
-                            <Card className={classes.root} keu={booking._id} variant="outlined">
+                            {booking.status == "confirmed" && <Card key={booking._id} variant="outlined">
                                 <CardContent>
                                     <Typography variant="h5" component="h2">
                                         {booking.subject}
-                                    </Typography> 
+                                    </Typography>
                                     <Typography >
                                         {moment(booking.date).format('MM/DD/YYYY')} {booking.time}
                                     </Typography>
@@ -91,9 +103,25 @@ const MyMeetings = () => {
                                     <Button size="small">{t("Meet Link")}</Button>
                                     <Button size="small" onClick={handleCancel(booking._id)}>{t("Cancel")}</Button>
                                 </CardActions>
+                                <form onSubmit={handleCancel}>
+                                    <input type="hidden" name="bookingId" value={booking._id} />
+                                    <Button type="submit" size="small">Cancel</Button>
+                                </form>
+                                <form onSubmit={handleRemove}>
+                                    <input type="hidden" name="bookingId" value={booking._id} />
+                                    <Button type="submit" size="small">Completed</Button>
+                                </form>
+                                <a target="_blank" href={booking.meetLink}>Meet Link</a>
+
                                
                             </Card>
                           
+
+                                
+
+}
+
+
 
 
                         </>
@@ -103,7 +131,7 @@ const MyMeetings = () => {
                 )}
                 </div>
 
-            </div>
+        </div>
 
 
     )

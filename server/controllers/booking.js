@@ -9,11 +9,11 @@ export const availableTimeSlots = async (req, res) => {
 }
 
 export const getSlots = async (req, res) => {
-    const { subject, year } = req.query;
-    const volunteers = await volunteer.find({ subject: subject, classRange: year });
+    const { subject, year,language } = req.query;
+    const volunteers = await volunteer.find({ subject: subject, classRange: year, languages: language });
     let tslots = volunteers.map(volunteer => volunteer.availableSlots);
     let slots = [].concat.apply([], tslots);
-    console.log(slots);
+   
     res.send(slots);
 
 }
@@ -33,14 +33,13 @@ export const bookSlot = async (req, res) => {
     
         const meetLink = `https://meet.jit.si/${userId}-${subject}-${year}-${vol._id}m  `;
         const meet = await meeting.create({ studentId: userId, volunteerId: vol._id, date: slotDate, time: slotTime, meetLink: meetLink, subject: subject, year: year, description: description });
-            await student.findOneAndUpdate({ _id: userId }, { $push: { meetings: meet } });
-            await volunteer.findOneAndUpdate({ _id: vol._id }, { $push: { meetings: meet } });
-        console.log(stu);
+        
+        res.status(200).json(meet);
+     
     } catch(err){
         console.log(err);
     }
-
-    res.send("Booked");
+ 
 
 
    
@@ -49,16 +48,44 @@ export const bookSlot = async (req, res) => {
 
 export const getBookings = async (req, res) => {
     const { userId } = req.query;
-    console.log(req.query);
+    
     const bookings = await meeting.find({ studentId: userId });
-    console.log(bookings);
+   
     res.send(bookings);
 }
 
 export const getVolunteerBookings = async (req, res) => {
+    
     const { userId } = req.query;
+   
     const bookings = await meeting.find({ volunteerId: userId });
+  
+    res.send(bookings);
+   
+}
+
+export const cancelBooking = async (req, res) => {
+    const { bookingId } = req.body;
+    const book = await meeting.findOneAndUpdate({ _id: bookingId }, { $set: { status: "cancelled" } });
+    const bookings = await meeting.find();
+
     res.send(bookings);
 }
+
+export const removeBooking = async (req, res) => {
+    const { bookingId } = req.body;
+    const book = await meeting.findOneAndDelete({ _id: bookingId });
+    const bookings = await meeting.find();
+
+    res.send(bookings);
+}
+
+export const getMeetings = async (req, res) => {
+    const bookings = await meeting.find();
+   
+    res.send(bookings);
+}
+
+
 
 

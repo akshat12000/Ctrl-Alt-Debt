@@ -64,7 +64,7 @@ export const signin = async (req, res) => {
 };
 
 export const signup = async (req, res) => {
-  console.log(req.body);
+
     const {userType}=req.body;
  
   try {
@@ -100,7 +100,7 @@ export const signup = async (req, res) => {
 
     }
     else if(userType=="volunteer"){
-      const { email, password , name ,year:classRange,subjects} = req.body;
+      const { email, password , name ,year:classRange,subjects,languages} = req.body;
 
       const oldUser = await volunteer.findOne({ email });
 
@@ -108,7 +108,7 @@ export const signup = async (req, res) => {
       
       const hashedPassword = await bcrypt.hash(password, 12);
   
-      const result = await volunteer.create({ email, password: hashedPassword, name, classRange, subjects,userType });
+      const result = await volunteer.create({ email, password: hashedPassword, name, classRange, subjects,userType,languages });
       const token = jwt.sign( { email: result.email, id: result._id }, secret, { expiresIn: "1h" } );
   
       res.status(201).json({ result, token });

@@ -21,7 +21,7 @@ export const getDoubt = async (req, res) => {
 
     try {
         const doubt = await Discussion.findById(id);
-        console.log(doubt);
+        
         res.status(200).json(doubt);
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -31,7 +31,6 @@ export const getDoubt = async (req, res) => {
 export const createDoubt = async (req, res) => {
     const doubt = req.body;
 
-    console.log(doubt);
 
     
 
@@ -74,6 +73,7 @@ export const commentDoubt = async (req, res) => {
 
     const doubt = await Discussion.findById(id);
     console.log(value);
+
 
     doubt.comments.push(value);
     let str="";
