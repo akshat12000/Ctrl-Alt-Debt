@@ -74,7 +74,14 @@ export const cancelBooking = async (req, res) => {
 
 export const removeBooking = async (req, res) => {
     const { bookingId } = req.body;
-    const book = await meeting.findOneAndDelete({ _id: bookingId });
+    const book = await meeting.findOneAndUpdate({ _id: bookingId }, { $set: { status: "completed" } });
+    const bookings = await meeting.find();
+
+    res.send(bookings);
+}
+export const removesBooking = async (req, res) => {
+    const { bookingId } = req.body;
+    const book = await meeting.findOneAndUpdate({ _id: bookingId }, { $set: { status: "fcompleted" } });
     const bookings = await meeting.find();
 
     res.send(bookings);

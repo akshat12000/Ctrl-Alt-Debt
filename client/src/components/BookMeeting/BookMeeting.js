@@ -50,7 +50,7 @@ const BookMeeting = () => {
         dispatch(createMeeting(meet));
 
 
-            // history.push('/student/mybookings');
+            history.push('/student/mybookings');
 
 
            
@@ -124,42 +124,7 @@ const BookMeeting = () => {
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
                         Get Slots
                     </Button>
-                    {isSlots && <div>
-                        <Typography component="h1" variant="h4">Available Slots</Typography>
-                        <Grid container spacing={2}>
-                            <FormControl >
-                                <InputLabel >{t("Subject")}</InputLabel>
-                                <Select
-                                    native
-                                    value={form.subject}
-                                    onChange={handleChange}
-                                    inputProps={{
-                                        name: 'subject',
-                                    }}
-                                >
-                                    <option aria-label="None" value="" />
-                                    <option value='maths'>{t("Maths")}</option>
-                                    <option value='english'>{t("English")}</option>
-                                    <option value='science'>{t("Science")}</option>
-                                    <option value='social'>{`${t("Social")} ${t("Science")}`}</option>
-                                    <option value='computer'>{t("Computer")}</option>
-                                    <option value='physics'>{t("Physics")}</option>
-                                    <option value='chemistry'>{t("Chemistry")}</option>
-                                    <option value='biology'>{t("Biology")}</option>
-
-                                    
-                                    
-
-                                </Select>
-                            </FormControl>
-
-                            <Input name="description" label={t("Description")} value={form.description} handleChange={handleChange} />
-
-                        </Grid>
-                        <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-                            {t("Get Slots")}
-                        </Button>
-                        </div>}
+                   
                         {isSlots && <div>
                             <Typography component="h1" variant="h4">{t("Available Slots")}</Typography>
                             <div style={{display:"flex",flexWrap:"wrap",flexBasis:"25%"}}>

@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getMeetings } from "../../actions/meetings";
 
-const drawerWidth=240;
+const drawerWidth = 240;
 const useStyles = makeStyles({
     root: {
         minWidth: 275,
@@ -30,7 +30,7 @@ const useStyles = makeStyles({
     pos: {
         marginBottom: 12,
     },
-    goal:{
+    goal: {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: drawerWidth,
     }
@@ -45,13 +45,13 @@ const MyMeetings = () => {
     const [bookings, setBookings] = useState([]);
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const classes = useStyles();
-    const {t,i18n} = useTranslation();
-    const open=useSelector((state)=>state.open);
-    
+    const { t, i18n } = useTranslation();
+    const open = useSelector((state) => state.open);
+
 
     const history = useHistory();
     const dispatch = useDispatch();
-    const meetings=useSelector((state)=>state.meetings);
+    const meetings = useSelector((state) => state.meetings);
 
     const handleCancel = async (e) => {
         e.preventDefault();
@@ -76,14 +76,16 @@ const MyMeetings = () => {
 
     useEffect(() => {
         dispatch(getMeetings(user.result._id));
-    }, [dispatch]);
+        setBookings(meetings);
+        console.log(bookings);
+    }, [meetings]);
 
 
     return (
-        <div className={open?classes.goal:null}>
-            <Typography variant="h3" style={{textAlign:"center"}}>{t("My Meetings")}</Typography>
-            
-                <div style={{display:"flex",flexWrap:"wrap",flexBasis:"25%",width:"100%"}}>
+        <div className={open ? classes.goal : null}>
+            <Typography variant="h3" style={{ textAlign: "center" }}>{t("My Meetings")}</Typography>
+
+            <div style={{ display: "flex", flexWrap: "wrap", flexBasis: "25%", width: "100%" }}>
                 {bookings.map(booking => {
                     return (
                         <>
@@ -100,26 +102,26 @@ const MyMeetings = () => {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Button size="small">{t("Meet Link")}</Button>
-                                    <Button size="small" onClick={handleCancel(booking._id)}>{t("Cancel")}</Button>
+                                    <a target="_blank" href={booking.meetLink}>Meet Link</a>
+                                    <form onSubmit={handleCancel}>
+                                        <input type="hidden" name="bookingId" value={booking._id} />
+                                        <Button type="submit" size="small">{t("Cancel")}</Button>
+                                    </form>
+                                    <form onSubmit={handleRemove}>
+                                        <input type="hidden" name="bookingId" value={booking._id} />
+                                        <Button type="submit" size="small">Completed</Button>
+                                    </form>
+
                                 </CardActions>
-                                <form onSubmit={handleCancel}>
-                                    <input type="hidden" name="bookingId" value={booking._id} />
-                                    <Button type="submit" size="small">Cancel</Button>
-                                </form>
-                                <form onSubmit={handleRemove}>
-                                    <input type="hidden" name="bookingId" value={booking._id} />
-                                    <Button type="submit" size="small">Completed</Button>
-                                </form>
-                                <a target="_blank" href={booking.meetLink}>Meet Link</a>
 
-                               
+
+
                             </Card>
-                          
 
-                                
 
-}
+
+
+                            }
 
 
 
@@ -129,7 +131,7 @@ const MyMeetings = () => {
                     )
                 }
                 )}
-                </div>
+            </div>
 
         </div>
 

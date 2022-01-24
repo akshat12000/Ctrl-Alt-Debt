@@ -70,7 +70,9 @@ const AvailableTimings = () => {
             {inputList.map((x, i) => {
                return(
                    <>
-                <DatePicker selected={x.dates} format='yyyy-MM-dd' onChange={(date)=>{ 
+                <DatePicker selected={x.dates} 
+                minDate={new Date()}
+                format='yyyy-MM-dd' onChange={(date)=>{ 
                     const modifydate=date.toLocaleDateString();
                   
                     const list = [...inputList];

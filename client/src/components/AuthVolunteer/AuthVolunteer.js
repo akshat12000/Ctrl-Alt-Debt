@@ -402,7 +402,7 @@ const initialState = { name: '', email: '', password: '', confirmPassword: '', y
                 </>
               )}
             </Grid>
-            <Grid item xs={12} sm={12}  >
+            {isSignup&&<Grid item xs={12} sm={12}  >
               <Typography variant="h5">Select languages you can teach in</Typography>
               <FormGroup row>
                 <FormControlLabel control={<Checkbox checked={langaugesState.english} onChange={handleLangaugesChange} name="english" />} label="English" />
@@ -421,7 +421,7 @@ const initialState = { name: '', email: '', password: '', confirmPassword: '', y
 
 
               </FormGroup>
-            </Grid>
+            </Grid>}
             <Button
               type="submit"
               fullWidth

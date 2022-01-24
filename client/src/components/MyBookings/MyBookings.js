@@ -100,7 +100,7 @@ const MyBookings = () => {
         const bookingId = e.target[0].value;
 
 
-        const kings = await axios.post('http://localhost:5000/booking/removeBooking', { bookingId: bookingId });
+        const kings = await axios.post('http://localhost:5000/booking/removesBooking', { bookingId: bookingId });
         setBookings(kings.data);
 
 
@@ -134,7 +134,7 @@ const MyBookings = () => {
         }
         getBookings();
     }
-        , []);
+        , [bookings]);
 
        
 
@@ -145,7 +145,7 @@ const MyBookings = () => {
                 {bookings.map(booking => {
                     return (
                         <>
-                            <Card className={classes.root} key={booking._id} variant="outlined" style={{margin:"1%"}}>
+                            {(booking.status=='cancelled'||booking.status=='confirmed'||booking.status=='completed')&&<Card className={classes.root} key={booking._id} variant="outlined" style={{margin:"1%"}}>
                                 <CardContent>
                                     <Typography variant="h5" component="h2">
 
@@ -160,11 +160,18 @@ const MyBookings = () => {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Button size="small" variant="contained" color="secondary">{t("Meet Link")}</Button>
-                                    {booking.status != "cancelled" && <a target="_blank" href={booking.meetLink}>Meet Link</a>}
+                                    {booking.status != "cancelled" && <a target="_blank" href={booking.meetLink}>{t("Meet Link")}</a>}
                                     {booking.status == "cancelled" &&
                                         <div>
                                             <div style={{ color: 'red' }}>cancelled</div>
+                                            <form onSubmit={handleCancel}>
+                                                <input type="hidden" name="bookingId" value={booking._id} />
+                                                <Button type="submit" size="small">Remove</Button>
+                                            </form>
+                                        </div>}
+                                        {booking.status == "completed" &&
+                                        <div>
+                                            <div style={{ color: 'red' }}>completed</div>
                                             <form onSubmit={handleCancel}>
                                                 <input type="hidden" name="bookingId" value={booking._id} />
                                                 <Button type="submit" size="small">Remove</Button>
@@ -217,7 +224,7 @@ const MyBookings = () => {
                                         </form>
                                         </Box>
                                 </Modal>
-                            </Card>
+                            </Card>}
 
 
 

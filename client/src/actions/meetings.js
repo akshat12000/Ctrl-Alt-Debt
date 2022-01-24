@@ -5,6 +5,7 @@ import * as api from '../api/meetings'
 export const getMeetings = (volunteerId) => async (dispatch) => {
     try {
         const { data } = await api.getMeetings(volunteerId);
+        console.log(data);
         dispatch({ type: "GET", payload: data });
 
     } catch (error) {
