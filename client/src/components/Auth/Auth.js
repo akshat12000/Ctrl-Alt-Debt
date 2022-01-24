@@ -17,7 +17,7 @@ const ColorButton = withStyles((theme) => ({
 
 const theme = createTheme({
   palette: {
-    tertiary: purple,
+    inherit: purple,
   },
 });
 
@@ -57,7 +57,7 @@ const Auth = () => {
           component={Link}
           to="/auth/admin"
           variant="contained"
-          color="tertiary"
+          color="inherit"
           size="large"
           style={{ margin: "1%" }}
         >

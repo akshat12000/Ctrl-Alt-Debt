@@ -52,10 +52,13 @@ export const upVoteBlogs = (req,res)=>{
     
 }
 
-export const deleteBlogs = (req,res)=>{
+export const deleteBlogs = async(req,res)=>{
     try {
 
         const id = req.params.id;
+        const foundBlog = await blog.findById(id);
+        const userId=foundBlog.creator.id;
+        await volunteer.findByIdAndUpdate(userId,{$inc:{score:-1}})
         blog.findByIdAndRemove(id,function(err){
             if(!err){
                 console.log("Deleted!")
