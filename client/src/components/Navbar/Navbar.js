@@ -33,6 +33,18 @@ const Navbar = () => {
         i18n.changeLanguage(e.target.value);
     }
 
+    const processLink = (s)=>{
+        let res="";
+        res+=s[0].toUpperCase();
+        for(let i=1;i<s.length;i++){
+            if(s[i].charCodeAt(0)>=65&&s[i].charCodeAt(0)<=90){
+                res+=" ";
+            }
+            res+=s[i];
+        }
+        return res;
+    }
+
     const eliminatedLinks = ["/auth","/auth/student","/auth/volunteer"];
 
     const handleDrawerOpen = ()=>{
@@ -106,8 +118,8 @@ const Navbar = () => {
                 </div>
                 <List>
                     {user?(user.result.hasOwnProperty('classRange')?
-                    volunteerLinks.map((link)=><ListItem onClick={()=>assign(link)} button style={{fontSize:"1rem"}}>{t(link.slice(1).replace("-"," ").replace("/","").replace("volunteer","").toUpperCase())}</ListItem>):
-                    studentLinks.map((link)=><ListItem onClick={()=>assign(link)} style={{fontSize:"1rem"}} button>{t(link.slice(1).replace("-"," ").replace("/","").replace("student","").toUpperCase())}</ListItem>)):null}
+                    volunteerLinks.map((link)=><ListItem onClick={()=>assign(link)} button style={{fontSize:"1rem"}}>{t(processLink(link.slice(1).replace("-"," ").replace("/","").replace("volunteer","")))}</ListItem>):
+                    studentLinks.map((link)=><ListItem onClick={()=>assign(link)} style={{fontSize:"1rem"}} button>{t(processLink(link.slice(1).replace("-"," ").replace("/","").replace("student","")))}</ListItem>)):null}
                 </List>
             </Drawer>
         </div>
