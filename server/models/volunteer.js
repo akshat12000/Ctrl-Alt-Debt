@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
-import {meetingSchema} from "./meeting.js";
+
 const volunteerSchema = mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
   classRange: { type: [Number], required: true },
   subjects: { type: [String], required: true },
-  meetings: { type: [meetingSchema] },
+  languages: { type: [String], required: true },
   availableSlots: { type: [String] },
   sessionsTaken: {
     type: Number,

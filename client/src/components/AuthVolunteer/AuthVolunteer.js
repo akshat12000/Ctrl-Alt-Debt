@@ -18,12 +18,12 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 
 
-const initialState = { name: '', email: '', password: '', confirmPassword: '', year: [], userType: '',subjects:[] };
+const initialState = { name: '', email: '', password: '', confirmPassword: '', year: [], userType: '',subjects:[] ,languages:[]};
 
 
 const AuthVolunteer = () => {
     const [form, setForm] = useState(initialState);
-    const [isSignup, setIsSignup] = useState(false);
+    const [isSignup, setIsSignup] = useState(false); 
     const dispatch = useDispatch();
     const history = useHistory();
     const classes = useStyles();
@@ -36,6 +36,8 @@ const AuthVolunteer = () => {
         maths: false,  english: false,  science: false, social: false,computer: false,physics: false,chemistry: false,biology: false,
         
     };
+    let initialLangauges ={ english:false,hindi:false,gujarati:false,marathi:false, punjabi:false,
+        tamil:false,telugu:false,kannada:false,bengali:false,malayalam:false,};
 
     const userType = location.pathname.split("/auth/")[1];
     useEffect(() => {
@@ -49,6 +51,7 @@ const AuthVolunteer = () => {
     const handleShowPassword = () => setShowPassword(!showPassword);
     const [yearState, setYearState] = useState(initialYear);
     const [subjectState, setSubjectState] = useState(initialSubjects);
+    const [langaugesState, setLangaugesState] = useState(initialLangauges);
 
     const switchMode = () => {
 
@@ -73,8 +76,14 @@ const AuthVolunteer = () => {
                 form.subjects.push(item);
             }
         }
+        for(const item in langaugesState){
+            if(langaugesState[item]){
+                form.languages.push(item);
+            }
+        }
 
-       console.log(form);
+        console.log(form);
+      
         if (isSignup) {
             dispatch(signup(form, history));
         } else {
@@ -93,6 +102,9 @@ const AuthVolunteer = () => {
     const handleSubjectChange = (event) => {
         setSubjectState({ ...subjectState, [event.target.name]: event.target.checked });
        
+    };
+    const handleLangaugesChange = (event) => {
+        setLangaugesState({ ...langaugesState, [event.target.name]: event.target.checked });
     };
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value })
@@ -151,6 +163,26 @@ const AuthVolunteer = () => {
                                         <FormControlLabel control={<Checkbox checked={subjectState.chemistry} onChange={handleSubjectChange} name="chemistry" />} label="Chemistry" />
                                         <FormControlLabel control={<Checkbox checked={subjectState.biology} onChange={handleSubjectChange} name="biology" />} label="Biology" />
                                         
+
+                                    </FormGroup>
+                                </Grid>
+                                <Grid item xs={12} sm={ 12}  >
+                                <Typography  variant="h5">Select languages you can teach in</Typography>
+                                    <FormGroup row>
+                                        <FormControlLabel control={<Checkbox checked={langaugesState.english} onChange={handleLangaugesChange} name="english" />} label="English" />
+                                        <FormControlLabel control={<Checkbox checked={langaugesState.hindi} onChange={handleLangaugesChange} name="hindi" />} label="Hindi" />
+                                        <FormControlLabel control={<Checkbox checked={langaugesState.gujarati} onChange={handleLangaugesChange} name="gujarati" />} label="Gujarati" />
+                                        <FormControlLabel control={<Checkbox checked={langaugesState.marathi} onChange={handleLangaugesChange} name="marathi" />} label="Marathi" />
+                                        <FormControlLabel control={<Checkbox checked={langaugesState.punjabi} onChange={handleLangaugesChange} name="punjabi" />} label="Punjabi" />
+                                        <FormControlLabel control={<Checkbox checked={langaugesState.bengali} onChange={handleLangaugesChange} name="bengali" />} label="Bengali" />
+                                        <FormControlLabel control={<Checkbox checked={langaugesState.telugu} onChange={handleLangaugesChange} name="telugu" />} label="Telugu" />
+                                        <FormControlLabel control={<Checkbox checked={langaugesState.tamil} onChange={handleLangaugesChange} name="tamil" />} label="Tamil" />
+                                        <FormControlLabel control={<Checkbox checked={langaugesState.kannada} onChange={handleLangaugesChange} name="kannada" />} label="Kannada" />
+                                        <FormControlLabel control={<Checkbox checked={langaugesState.malayalam} onChange={handleLangaugesChange} name="malayalam" />} label="Malayalam" />
+
+                                        
+                    
+                                      
 
                                     </FormGroup>
                                 </Grid>

@@ -24,7 +24,7 @@ const AvailableTimings = () => {
         const list = [...inputList];
         list[index][name] = value;
         setInputList(list);
-        console.log(inputList);
+    
     };
 
     const handleAddClick = () => {

@@ -2,7 +2,7 @@ import blog from '../models/blog.js';
 
 export const getBlogs = async (req,res)=>{
     try {
-        const blogs = await blog.find();
+        const blogs = await blog.find();  
         res.status(200).json(blogs);
     } catch (error) {
         console.log(error.message);
@@ -70,7 +70,6 @@ export const updateBlogs = (req,res)=>{
     try {
         const id = req.params.id;
         const post = req.body;
-        console.log(post);
         blog.findByIdAndUpdate(id,{title:post.title,body:post.body,year:post.year,subject:post.subject,creator:post.creator,upvotes:post.upvotes,upvoteList:post.upvoteList},{new:true},function(err,result){
             if(!err){
                 res.status(200).json(result);
