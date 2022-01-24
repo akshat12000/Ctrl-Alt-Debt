@@ -54,12 +54,11 @@ const LeaderBoard = () => {
   return (
     <div className={open?classes.root:null}>
       <Typography variant="h3" color="primary">
-        Leaderboard
-        {t("Leaderboard(Based on daily login count)")}
+        {t("Leaderboard")}
       </Typography>
       <br/>
       <Typography variant="h4" color="primary">
-      Based on daily login count and number of doubts answered
+      {t("Based on daily login count and number of doubts answered")}
       </Typography>
       <br/>
       <TableContainer component={Paper}>

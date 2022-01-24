@@ -11,6 +11,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
+import { useTranslation } from 'react-i18next';
 
 const drawerWidth = 240;
 
@@ -39,6 +40,7 @@ const WhiteTextTypography = withStyles({
 const VolunteerLeaderBoard = () => {
   const open = useSelector((state) => state.open);
   const classes = useStyles();
+  const {t,i18n} = useTranslation();
   const [volunteerLeaderboard, setVolunteerLeaderboard] = useState([]);
   useEffect(() => {
     const getVolunteerLeaderboard = async () => {
@@ -52,11 +54,11 @@ const VolunteerLeaderBoard = () => {
   return (
     <div className={open?classes.root:null}>
       <Typography variant="h3" color="primary">
-        Volunteer Leaderboard
+        {t("Volunteer Leaderboard")}
         </Typography>
         <br/>
         <Typography variant="h4" color="primary">
-        Based on number of sessions taken and number of blogs posted
+        {t("Based on number of sessions taken and number of blogs posted")}
       </Typography>
       <br />
       <TableContainer component={Paper}>
@@ -65,17 +67,17 @@ const VolunteerLeaderBoard = () => {
             <TableRow className={classes.tableRow}>
               <TableCell>
                 <WhiteTextTypography variant="h5" color="common.white">
-                  <strong>Rank</strong>
+                  <strong>{t("Rank")}</strong>
                 </WhiteTextTypography>
               </TableCell>
               <TableCell align="right">
                 <WhiteTextTypography variant="h5" color="primary">
-                  <strong>Name</strong>
+                  <strong>{t("Name")}</strong>
                 </WhiteTextTypography>
               </TableCell>
               <TableCell align="right">
                 <WhiteTextTypography variant="h5" color="primary">
-                  <strong>Score</strong>
+                  <strong>{t("Score")}</strong>
                 </WhiteTextTypography>
               </TableCell>
             </TableRow>

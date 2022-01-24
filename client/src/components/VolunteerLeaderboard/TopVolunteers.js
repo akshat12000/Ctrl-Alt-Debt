@@ -11,6 +11,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles({
   table: {
@@ -35,6 +36,7 @@ const WhiteTextTypography = withStyles({
 const TopVolunteers = () => {
   const classes = useStyles();
   const [volunteerLeaderboard, setVolunteerLeaderboard] = useState([]);
+  const {t,i18n} = useTranslation();
   useEffect(() => {
     const getVolunteerLeaderboard = async () => {
       const board = await axios.get("http://localhost:5000/volunteerLeaderboard");
@@ -46,7 +48,8 @@ const TopVolunteers = () => {
 
   return (
     <div className={classes.centered}> 
-      <Typography variant="h3" color="primary">
+      <Typography variant="h4" color="primary" style={{textAlign:"center"}}>
+        {t("Top 5 Volunteers")}
       </Typography>
       <br />
       <TableContainer component={Paper}>
@@ -55,17 +58,17 @@ const TopVolunteers = () => {
             <TableRow className={classes.tableRow}>
               <TableCell>
                 <WhiteTextTypography variant="h5" color="common.white">
-                  <strong>Rank</strong>
+                  <strong>{t("Rank")}</strong>
                 </WhiteTextTypography>
               </TableCell>
               <TableCell align="right">
                 <WhiteTextTypography variant="h5" color="primary">
-                  <strong>Volunteer</strong>
+                  <strong>{t("Volunteer")}</strong>
                 </WhiteTextTypography>
               </TableCell>
               <TableCell align="right">
                 <WhiteTextTypography variant="h5" color="primary">
-                  <strong>Score</strong>
+                  <strong>{t("Score")}</strong>
                 </WhiteTextTypography>
               </TableCell>
             </TableRow>

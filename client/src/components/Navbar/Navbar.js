@@ -106,8 +106,8 @@ const Navbar = () => {
                 </div>
                 <List>
                     {user?(user.result.hasOwnProperty('classRange')?
-                    volunteerLinks.map((link)=><ListItem onClick={()=>assign(link)} button>{t(link.slice(1).replace("-"," ").replace("/","").replace("volunteer","").toUpperCase())}</ListItem>):
-                    studentLinks.map((link)=><ListItem onClick={()=>assign(link)} button>{t(link.slice(1).replace("-"," ").replace("/","").replace("student","").toUpperCase())}</ListItem>)):null}
+                    volunteerLinks.map((link)=><ListItem onClick={()=>assign(link)} button style={{fontSize:"1rem"}}>{t(link.slice(1).replace("-"," ").replace("/","").replace("volunteer","").toUpperCase())}</ListItem>):
+                    studentLinks.map((link)=><ListItem onClick={()=>assign(link)} style={{fontSize:"1rem"}} button>{t(link.slice(1).replace("-"," ").replace("/","").replace("student","").toUpperCase())}</ListItem>)):null}
                 </List>
             </Drawer>
         </div>

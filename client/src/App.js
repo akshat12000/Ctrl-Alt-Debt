@@ -17,6 +17,7 @@ import DoubtDetails from './components/DoubtDetails/DoubtDetails'
 import Resources from './components/Resources/Resources'
 import LeaderBoard from './components/LeaderBoard/LeaderBoard'
 import VolunteerLeaderboard from './components/VolunteerLeaderboard/VolunteerLeaderboard'
+import Admin from './components/AdminPanel/Admin'
 
 const App = () => {
     return (
@@ -41,6 +42,7 @@ const App = () => {
                 <Route exact path="/resources" component={Resources} /> 
                 <Route exact path="/leaderboard" component={LeaderBoard} /> 
                 <Route exact path="/volunteerLeaderboard" component={VolunteerLeaderboard} />
+                <Route exact path="/admin" component={Admin} /> 
             </Switch>
         </BrowserRouter>
     )
