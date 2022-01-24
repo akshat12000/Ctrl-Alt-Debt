@@ -12,12 +12,13 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
-
 export const fetchDoubt = (id) => axios.get(`${url}/${id}`);
 export const fetchDoubts = () => axios.get(url);
 export const createDoubt = (newDoubt) => axios.post(url, newDoubt);
-export const updateDoubt = (id, updatedDoubt) => axios.patch(`${url}/${id}`, updatedDoubt);
-export const comment = (value, id) => axios.post(`${url}/${id}/commentDoubt`, { value });
+export const updateDoubt = (id, updatedDoubt) =>
+  axios.patch(`${url}/${id}`, updatedDoubt);
+export const comment = (value, id) =>
+  axios.post(`${url}/${id}/commentDoubt`, { value });
 export const deleteDoubt = (id) => axios.delete(`${url}/${id}`);
 
 export const signIn = (formData) => API.post("/user/signin", formData);

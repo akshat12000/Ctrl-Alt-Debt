@@ -1,13 +1,10 @@
-import * as api from '../api/index.js';
+import * as api from "../api/index.js";
 
 export const getDoubt = (id) => async (dispatch) => {
   try {
     dispatch({ type: "START_LOADING" });
 
     const { data } = await api.fetchDoubt(id);
-    //console.log(data);
-    //console.log("actions");
-
     dispatch({ type: "FETCH_POST", payload: { doubt: data } });
   } catch (error) {
     console.log(error);

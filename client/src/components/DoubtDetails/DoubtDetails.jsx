@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { getDoubt } from "../../actions/doubts";
 import CommentSection from './CommentSection';
+import useStyles from "./styles";
 import { useTranslation } from "react-i18next";
 
 const Doubt = () => {
@@ -17,6 +18,8 @@ const Doubt = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
+  const classes = useStyles();
+  const open = useSelector((state)=>state.open);
   
   useEffect(() => {
       console.log(id);
@@ -37,7 +40,7 @@ const Doubt = () => {
   //console.log(doubt);
   
   return (
-    <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
+    <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6} className={open?classes.root:null}>
     <div>
       <div>
         <Typography variant="h3" component="h2">
