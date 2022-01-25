@@ -4,8 +4,14 @@ import { getDoubts } from "../../actions/doubts";
 import Form from "../Form/Form";
 import Doubts from "../Doubts/Doubts";
 import useStyles from './styles'
+import { useHistory } from "react-router-dom";
 
 const Discussion = () => {
+  const user = JSON.parse(localStorage.getItem("profile"));
+  const history = useHistory();
+  if (!user) {
+    history.push("/auth");
+  }
   const [currentId, setCurrentId] = useState(0);
   const doubts = useSelector((state) => state.doubts);
   const dispatch = useDispatch();

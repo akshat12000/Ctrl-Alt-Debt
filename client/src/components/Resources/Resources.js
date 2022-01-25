@@ -1,19 +1,24 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
-import useStyles from './styles'
-import { useTranslation } from 'react-i18next'
+import useStyles from "./styles";
+import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom";
 
 const Resources = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
-  const {t,i18n} = useTranslation();
+  const history = useHistory();
+  if (!user) {
+    history.push("/auth");
+  }
+  const { t, i18n } = useTranslation();
   console.log(user?.result.year);
   const userYear = user?.result.year;
-  const classes=useStyles();
-  const open = useSelector((state)=>state.open);
+  const classes = useStyles();
+  const open = useSelector((state) => state.open);
 
   return (
-    <div className={open?classes.root:null}>
+    <div className={open ? classes.root : null}>
       {user ? (
         user.result.hasOwnProperty("classRange") ? (
           <Typography variant="h1" style={{ textAlign: "center" }}>
@@ -26,11 +31,15 @@ const Resources = () => {
             </Typography>
             <br />
             <Typography variant="h4" style={{ textAlign: "center" }}>
-              {t(`Below are the folders which contains PDFs of NCERT books of different subjects in class ${userYear}`)}
+              {t(
+                `Below are the folders which contains PDFs of NCERT books of different subjects in class ${userYear}`
+              )}
             </Typography>
             <br />
             <Typography variant="h5" style={{ textAlign: "center" }}>
-              {t("You can refer to these books to get in-depth knowledge about the subjects anytime")}
+              {t(
+                "You can refer to these books to get in-depth knowledge about the subjects anytime"
+              )}
             </Typography>
             <br />
             {userYear == 1 ? (

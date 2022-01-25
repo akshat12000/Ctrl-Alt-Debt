@@ -12,10 +12,12 @@ import CommentSection from './CommentSection';
 import useStyles from "./styles";
 import { useTranslation } from "react-i18next";
 
+
 const Doubt = () => {
   const { doubt, doubts, isLoading } = useSelector((state) => state.doubts);
   const {t,i18n}=useTranslation();
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem("profile"));
   const history = useHistory();
   const { id } = useParams();
   const classes = useStyles();

@@ -12,6 +12,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
 import { useTranslation } from 'react-i18next';
+import { useHistory } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -38,6 +39,11 @@ const WhiteTextTypography = withStyles({
 })(Typography);
 
 const LeaderBoard = () => {
+  const user = JSON.parse(localStorage.getItem("profile"));
+  const history = useHistory();
+  if (!user) {
+    history.push("/auth");
+  }  
   const open = useSelector((state) => state.open);
   const {t,i18n} = useTranslation();
   const classes = useStyles();

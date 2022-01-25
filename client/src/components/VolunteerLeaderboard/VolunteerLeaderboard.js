@@ -11,7 +11,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -25,10 +26,10 @@ const useStyles = makeStyles({
   tableCell: {
     color: "pink",
   },
-  root:{
+  root: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
-},
+  },
 });
 
 const WhiteTextTypography = withStyles({
@@ -38,13 +39,20 @@ const WhiteTextTypography = withStyles({
 })(Typography);
 
 const VolunteerLeaderBoard = () => {
+  const user = JSON.parse(localStorage.getItem("profile"));
+  const history = useHistory();
+  if (!user) {
+    history.push("/auth");
+  }
   const open = useSelector((state) => state.open);
   const classes = useStyles();
-  const {t,i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   const [volunteerLeaderboard, setVolunteerLeaderboard] = useState([]);
   useEffect(() => {
     const getVolunteerLeaderboard = async () => {
-      const board = await axios.get("http://localhost:5000/volunteerLeaderboard");
+      const board = await axios.get(
+        "http://localhost:5000/volunteerLeaderboard"
+      );
 
       setVolunteerLeaderboard(board.data);
     };
@@ -52,12 +60,12 @@ const VolunteerLeaderBoard = () => {
   }, []);
 
   return (
-    <div className={open?classes.root:null}>
+    <div className={open ? classes.root : null}>
       <Typography variant="h3" color="primary">
         {t("Volunteer Leaderboard")}
-        </Typography>
-        <br/>
-        <Typography variant="h4" color="primary">
+      </Typography>
+      <br />
+      <Typography variant="h4" color="primary">
         {t("Based on number of sessions taken and number of blogs posted")}
       </Typography>
       <br />
