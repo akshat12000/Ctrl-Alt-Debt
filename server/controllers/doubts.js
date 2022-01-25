@@ -2,7 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 
 import Discussion from '../models/discussion.js';
-import student from '../models/student.js';
+import Student from '../models/student.js';
 
 const router = express.Router();
 
@@ -83,21 +83,22 @@ export const commentDoubt = async (req, res) => {
         }
         str=str+value[i];
     }
-    
-    student.find({ name: str}, function (err, docs) {
-        if (err){
-            console.log(err);
-        }
-        else{
-            console.log(docs[0].dayCount);
-            let val=docs[0].dayCount;
-            docs[0].dayCount=val+1;
-            console.log(docs[0].dayCount);
-            docs[0].save();
-        }
-    });
+    console.log(str);
+  const updatedDoubt = await Discussion.findByIdAndUpdate(id, doubt, {
+    new: true,
+  });
 
-    const updatedDoubt = await Discussion.findByIdAndUpdate(id, doubt, { new: true });
+  res.json(updatedDoubt);
 
-    res.json(updatedDoubt);
+  Student.find({ name: str }, function (err, docs) {
+    if (docs.length == 0) {
+      console.log("volunteer");
+    } else {
+      console.log(docs[0].dayCount);
+      let val = docs[0].dayCount;
+      docs[0].dayCount = val + 1;
+      console.log(docs[0].dayCount);
+      docs[0].save();
+    }
+  });
 };

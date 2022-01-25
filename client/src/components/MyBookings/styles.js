@@ -11,7 +11,6 @@ export default makeStyles((theme)=>({
         width: 275,
         border: "1px solid blue"
     },
-    ,
     avatar:{
         background:"#fc5f53"
     },
