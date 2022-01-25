@@ -19,7 +19,7 @@ const Navbar = () => {
     const classes = useStyles();
     const volunteerLinks = ["/volunteer/availableTimings","/volunteer/myMeetings","/discussion","/blogs", "/volunteerLeaderboard"];
     const studentLinks = ["/student/bookMeeting","/student/myBookings","/discussion","/blogs","/leaderboard", "/resources", "/volunteerLeaderboard"];
-    const [language,setLanguage]=useState(JSON.parse(localStorage.getItem('profile')).language);
+    const [language,setLanguage]=useState(JSON.parse(localStorage.getItem('profile'))?JSON.parse(localStorage.getItem('profile')).language:"en");
     const open = useSelector((state)=>state.open);
     const logout = () => {
         dispatch({ type: actionType.LOGOUT });
