@@ -35,13 +35,13 @@ export const signin = async (req, res) => {
        await dUser.save();
        console.log("saved daily!")
         const newUser = await student.findByIdAndUpdate(oldUser._id,{$inc:{dayCount:5}})
-        res.status(200).json({ result: newUser, token,message:"first" });
+        res.status(200).json({ result: newUser, token,message:"first" ,language:"en"});
       }else if(getUser && getUser.date!==nDate){
         await dailyLogin.findOneAndUpdate({uId},{date:nDate,val:getUser.val});
         const newUser = await student.findByIdAndUpdate(oldUser._id,{$inc:{dayCount:1}})
-        res.status(200).json({ result: newUser, token,message:"first" });
+        res.status(200).json({ result: newUser, token,message:"first",language:"en" });
       }else{
-        res.status(200).json({ result: oldUser, token,message:"second" });
+        res.status(200).json({ result: oldUser, token,message:"second",language:"en" });
       }
     }
     else if (userType === "volunteer") {
@@ -55,7 +55,7 @@ export const signin = async (req, res) => {
   
       const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, secret, { expiresIn: "1h" });
   
-      res.status(200).json({ result: oldUser, token });
+      res.status(200).json({ result: oldUser, token,language:"en" });
 
     }
     else
@@ -70,7 +70,7 @@ export const signin = async (req, res) => {
   
       const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, secret, { expiresIn: "1h" });
   
-      res.status(200).json({ result: oldUser, token });
+      res.status(200).json({ result: oldUser, token ,language:"en"});
     }
    
   } catch (err) {
@@ -104,13 +104,13 @@ export const signup = async (req, res) => {
         })
        await dUser.save();
         const newResult = await student.findByIdAndUpdate(result._id,{$inc:{dayCount:5}})
-        res.status(200).json({ result: newResult, token,message:"first" });
+        res.status(200).json({ result: newResult, token,message:"first",language:"en" });
       }else if(getUser && getUser.date!==nDate){
         await dailyLogin.findOneAndUpdate({uId},{date:nDate,val:getUser.val});
         const newResult = await student.findByIdAndUpdate(result._id,{$inc:{dayCount:1}})
-        res.status(200).json({ result: newResult, token,message:"first" });
+        res.status(200).json({ result: newResult, token,message:"first",language:"en" });
       }else{
-        res.status(200).json({ result: result, token,message:"second" });
+        res.status(200).json({ result: result, token,message:"second",language:"en" });
       }
 
     }
@@ -126,7 +126,7 @@ export const signup = async (req, res) => {
       const result = await volunteer.create({ email, password: hashedPassword, name, classRange, subjects,userType,languages });
       const token = jwt.sign( { email: result.email, id: result._id }, secret, { expiresIn: "1h" } );
   
-      res.status(201).json({ result, token });
+      res.status(201).json({ result, token,language:"en" });
     }
     
     

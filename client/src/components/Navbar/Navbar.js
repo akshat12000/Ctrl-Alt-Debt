@@ -19,7 +19,7 @@ const Navbar = () => {
     const classes = useStyles();
     const volunteerLinks = ["/volunteer/availableTimings","/volunteer/myMeetings","/discussion","/blogs", "/volunteerLeaderboard"];
     const studentLinks = ["/student/bookMeeting","/student/myBookings","/discussion","/blogs","/leaderboard", "/resources", "/volunteerLeaderboard"];
-    const [language,setLanguage]=useState("en");
+    const [language,setLanguage]=useState(JSON.parse(localStorage.getItem('profile')).language);
     const open = useSelector((state)=>state.open);
     const logout = () => {
         dispatch({ type: actionType.LOGOUT });
@@ -27,9 +27,12 @@ const Navbar = () => {
         dispatch({type:"UNSET"});
         setUser(null);
     };
-
     const handleLang = (e)=>{
+        console.log(e.target.value);
         setLanguage(e.target.value);
+        let lang2=JSON.parse(localStorage.getItem('profile'));
+        lang2={...lang2,language:e.target.value};
+        localStorage.setItem('profile',JSON.stringify(lang2));
         i18n.changeLanguage(e.target.value);
     }
 
