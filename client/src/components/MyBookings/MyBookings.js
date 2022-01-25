@@ -89,10 +89,14 @@ const MyBookings = () => {
     };
 
     const handleClose = () => {
-        handleOpenm();
-        console.log("close");
+       
         setAnchorEl(null);
     };
+    const handleCloseo = () => {
+        handleOpenm();
+        setAnchorEl(null);
+    };
+
 
 
     const handleCancel = async (e) => {
@@ -199,7 +203,7 @@ const MyBookings = () => {
                                         }}
                                     >
                                         {options.map((option) => (
-                                            <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
+                                            <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleCloseo}>
                                                 {t(option)}
                                             </MenuItem>
                                         ))}

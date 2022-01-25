@@ -16,7 +16,7 @@ import Icon from "./icon";
 import { signina, signup } from "../../actions/auth";
 import { AUTH } from "../../constants/actionTypes";
 import useStyles from "./styles";
-import Input from "./input";
+import Input from "./Input";
 
 const initialState = {
     email: "",

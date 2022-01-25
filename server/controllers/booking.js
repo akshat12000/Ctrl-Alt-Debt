@@ -1,6 +1,7 @@
 import volunteer from "../models/volunteer.js";
 import student from "../models/student.js";
 import meeting from "../models/meeting.js";
+import dailyLogin from "../models/dailyLogin.js";
 
 export const availableTimeSlots = async (req, res) => {
     const id = req.body.user.result._id;
@@ -13,8 +14,11 @@ export const getSlots = async (req, res) => {
     const volunteers = await volunteer.find({ subject: subject, classRange: year, languages: language });
     let tslots = volunteers.map(volunteer => volunteer.availableSlots);
     let slots = [].concat.apply([], tslots);
+    let uniqslots=[...new Set(slots)];
+
+
    
-    res.send(slots);
+    res.send(uniqslots);
 
 }
 
@@ -30,6 +34,8 @@ export const bookSlot = async (req, res) => {
         const stu = await student.findOne({ _id: userId });
     
         const vol = await volunteer.findOneAndUpdate({ subject: subject, classRange: year, availableSlots: slot }, { $pull: { availableSlots: slot } });
+
+        await volunteer.findOneAndUpdate({_id:vol._id},{$inc:{score:1}});
     
         const meetLink = `https://meet.jit.si/${userId}-${subject}-${year}-${vol._id}m  `;
         const meet = await meeting.create({ studentId: userId, volunteerId: vol._id, date: slotDate, time: slotTime, meetLink: meetLink, subject: subject, year: year, description: description });
