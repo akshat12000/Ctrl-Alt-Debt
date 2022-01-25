@@ -33,12 +33,6 @@ const Form = ({ currentId, setCurrentId }) => {
     if (doubt) setDoubtData(doubt);
   }, [doubt]);
 
-  // const showFormHandler = () => {
-  //   setShowForm(!showForm);
-  //   setShowButton(!showButton);
-  //   clear();
-  // };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (currentId) {
@@ -53,19 +47,6 @@ const Form = ({ currentId, setCurrentId }) => {
 
   return (
     <Card className={classes.card} borderradius="borderradius" elevation={6}>
-      {/* {showButton && (
-        <Box textAlign="center">
-          <Button
-            variant="contained"
-            spacing={5}
-            color="primary"
-            size="small"
-            onClick={showFormHandler}
-          >
-            <h3>Ask your doubt</h3>
-          </Button>
-        </Box>
-      )} */}
       <h1>{t("Ask your doubt?")}</h1>
         <form autoComplete="off" noValidate onSubmit={handleSubmit}>
           <TextField
