@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http://localhost:5000" });
-const url = "http://localhost:5000/discussion";
+const API = axios.create({ baseURL: "https://gyandaan-backend.herokuapp.com" });
+const url = "https://gyandaan-backend.herokuapp.com/discussion";
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("profile")) {
     req.headers.Authorization = `Bearer ${

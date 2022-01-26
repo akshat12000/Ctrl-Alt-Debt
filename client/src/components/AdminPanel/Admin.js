@@ -25,7 +25,7 @@ function Admin() {
 
     const getComplaints = async () => {
       try {
-          const infos  = await axios.get("http://localhost:5000/complaint");
+          const infos  = await axios.get("https://gyandaan-backend.herokuapp.com/complaint");
           setData(infos.data);
         console.log(data);
       } catch (error) {

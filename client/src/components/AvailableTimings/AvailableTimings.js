@@ -66,7 +66,7 @@ const AvailableTimings = () => {
         availableslots.push(temp);
       }
     });
-    axios.post("http://localhost:5000/booking/availableTimeSlots", {
+    axios.post("https://gyandaan-backend.herokuapp.com/booking/availableTimeSlots", {
       availableslots,
       user,
     });

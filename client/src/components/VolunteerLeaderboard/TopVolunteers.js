@@ -39,7 +39,7 @@ const TopVolunteers = () => {
   const {t,i18n} = useTranslation();
   useEffect(() => {
     const getVolunteerLeaderboard = async () => {
-      const board = await axios.get("http://localhost:5000/volunteerLeaderboard");
+      const board = await axios.get("https://gyandaan-backend.herokuapp.com/volunteerLeaderboard");
 
       setVolunteerLeaderboard(board.data);
     };

@@ -2,6 +2,6 @@ import axios from 'axios';
 
 
 
-export const getMeetings = (volunteerId)=> axios.get(`http://localhost:5000/booking/getVolunteerBookings?userId=${volunteerId}`);
+export const getMeetings = (volunteerId)=> axios.get(`https://gyandaan-backend.herokuapp.com/booking/getVolunteerBookings?userId=${volunteerId}`);
 
-export const createMeeting=(meet)=>axios.post('http://localhost:5000/booking/bookSlot',meet);
+export const createMeeting=(meet)=>axios.post('https://gyandaan-backend.herokuapp.com/booking/bookSlot',meet);

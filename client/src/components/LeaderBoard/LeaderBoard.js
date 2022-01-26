@@ -50,7 +50,7 @@ const LeaderBoard = () => {
   const [leaderboard, setLeaderboard] = useState([]);
   useEffect(() => {
     const getLeaderboard = async () => {
-      const board = await axios.get("http://localhost:5000/leaderboard");
+      const board = await axios.get("https://gyandaan-backend.herokuapp.com/leaderboard");
 
       setLeaderboard(board.data);
     };

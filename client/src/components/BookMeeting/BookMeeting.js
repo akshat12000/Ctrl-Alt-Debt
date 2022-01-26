@@ -31,7 +31,7 @@ const BookMeeting = () => {
     const handleSubmit = async (e) => {   
         e.preventDefault();
        
-        const tempslots= await axios.get(`http://localhost:5000/booking/getSlots?subject=${form.subject}&year=${form.year}&language=${form.language}`);
+        const tempslots= await axios.get(`https://gyandaan-backend.herokuapp.com/booking/getSlots?subject=${form.subject}&year=${form.year}&language=${form.language}`);
         console.log(tempslots.data);
         setSlots(tempslots.data);
         setIsSlots(true);

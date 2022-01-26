@@ -97,7 +97,7 @@ const MyBookings = () => {
     const bookingId = e.target[0].value;
 
     const kings = await axios.post(
-      "http://localhost:5000/booking/removesBooking",
+      "https://gyandaan-backend.herokuapp.com/booking/removesBooking",
       { bookingId: bookingId }
     );
     setBookings(kings.data);
@@ -113,7 +113,7 @@ const MyBookings = () => {
     const complaint = { bookingId, studentId, volunteerId, description };
 
     const response = await axios.post(
-      "http://localhost:5000/complaint",
+      "https://gyandaan-backend.herokuapp.com/complaint",
       complaint
     );
     handleClosem();
@@ -123,7 +123,7 @@ const MyBookings = () => {
   useEffect(() => {
     const getBookings = async () => {
       const bkings = await axios.get(
-        `http://localhost:5000/booking/getBookings?userId=${user.result._id}`
+        `https://gyandaan-backend.herokuapp.com/booking/getBookings?userId=${user.result._id}`
       );
 
       setBookings(bkings.data);

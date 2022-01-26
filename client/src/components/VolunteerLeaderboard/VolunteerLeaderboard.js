@@ -51,7 +51,7 @@ const VolunteerLeaderBoard = () => {
   useEffect(() => {
     const getVolunteerLeaderboard = async () => {
       const board = await axios.get(
-        "http://localhost:5000/volunteerLeaderboard"
+        "https://gyandaan-backend.herokuapp.com/volunteerLeaderboard"
       );
 
       setVolunteerLeaderboard(board.data);

@@ -57,7 +57,7 @@ const MyMeetings = () => {
     const bookingId = e.target[0].value;
 
     const kings = await axios.post(
-      "http://localhost:5000/booking/cancelBooking",
+      "https://gyandaan-backend.herokuapp.com/booking/cancelBooking",
       { bookingId: bookingId }
     );
     setBookings(kings.data);
@@ -68,7 +68,7 @@ const MyMeetings = () => {
     const bookingId = e.target[0].value;
 
     const kings = await axios.post(
-      "http://localhost:5000/booking/removeBooking",
+      "https://gyandaan-backend.herokuapp.com/booking/removeBooking",
       { bookingId: bookingId }
     );
     setBookings(kings.data);
