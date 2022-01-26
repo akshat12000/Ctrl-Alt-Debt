@@ -18,7 +18,7 @@
 -   Use your creativity on how you make the platform engaging, safe and efficient (student to volunteer ratios).
 
 ## Solution
-We have developed a responsive website, to help students gain knowledge, and increase their understanding on several topics, free of cost. Our website has the following features:
+We have developed a website to help students gain knowledge, and increase their understanding on several topics, free of cost. Our website has the following features:
 
 1.  **Mentorship Sessions:** Students can choose a suitable time slot of 30mins, to video call with a mentor who will explain their doubts. Timings are flexible, for students’ convenience. If students have any issues after the video call, they can report after the session ends.
     
