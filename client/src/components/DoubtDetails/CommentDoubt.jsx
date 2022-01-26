@@ -28,6 +28,9 @@ const CommentSection = ({ doubt }) => {
   };
 
   console.log(doubt);
+  if(!comments){
+    window.location.reload()
+  }
   return (
     <div>
       <div >
