@@ -3,7 +3,7 @@
 ### Do check out these links:
 <a href="https://gyandaan-ctrl-alt-debt.netlify.app/">Hosted Website</a><br/>
 <a href="https://docs.google.com/presentation/d/1oMKAzZyZKIy0rnrO6dOiR34T1kbVa2w3765O3PbmqbM/edit#slide=id.g1108132feab_1_0">Presentation For Prototype Round</a><br/>
-<a href="https://youtu.be/afvhdMRwQGg">Link to our prototype demo</a>
+<a href="https://youtu.be/XytLX7BT2wo">Link to our prototype demo</a>
 
 ## Problem Statement
 -   Gyandaan is analogous to Shramdaan, which means voluntary contribution of knowledge. Gyandaan is made of two words, ‘Gyan’ means knowledge and ‘daan’ means donation. It means a voluntary contribution of citizens towards community education involving teaching, mentoring and helping someone in academics. It is a way of helping our society and contributing for the overall upliftment of the students especially from the underprivileged and poor backgrounds who can't afford to enroll themselves into coaching classes and other courses.
