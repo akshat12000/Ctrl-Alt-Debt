@@ -1,8 +1,26 @@
 import React from "react";
-import { Button} from "@material-ui/core";
+import { Button, createTheme} from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
+import { purple } from '@material-ui/core/colors';
+import { withStyles } from '@material-ui/styles';
+import { ThemeProvider } from '@material-ui/core';
+const ColorButton = withStyles((theme) => ({
+    root: {
+      color: theme.palette.getContrastText(purple[500]),
+      backgroundColor: purple[500],
+      '&:hover': {
+        backgroundColor: purple[700],
+      },
+    },
+}))(Button);
+
+const theme = createTheme({
+    palette: {
+      tertiary: purple,
+    },
+  });
 
 const Auth = () => {
 
@@ -44,6 +62,11 @@ const Auth = () => {
       >
         {t("Volunteer Login")}
       </Button>
+      <ThemeProvider theme={theme}>
+                <ColorButton component={Link} to="/admin" variant="contained" color="tertiary" size="large" style={{margin:"1%"}}>
+                    {t("Admin Login")}
+                </ColorButton>
+      </ThemeProvider>
     </div>
   );
 };
