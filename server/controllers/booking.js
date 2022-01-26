@@ -15,6 +15,8 @@ export const getSlots = async (req, res) => {
     let tslots = volunteers.map(volunteer => volunteer.availableSlots);
     let slots = [].concat.apply([], tslots);
     let uniqslots=[...new Set(slots)];
+    uniqslots.sort();
+    console.log(uniqslots);
 
 
    

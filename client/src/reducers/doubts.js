@@ -22,11 +22,11 @@ export default (state = { isLoading: true, doubts: [] }, action) => {
           return doubt;
         }),
       };
-    case "CREATE":
+    case "CREATE_DOUBT":
       return { ...state, doubts: [...state.doubts, action.payload] };
-    case "UPDATE":
+    case "UPDATE_DOUBT":
       return { ...state, doubts: state.doubts.map((doubt) => (doubt._id === action.payload._id ? action.payload : doubt)) };
-    case "DELETE":
+    case "DELETE_DOUBT":
       return { ...state, doubts: state.doubts.filter((doubt) => doubt._id !== action.payload) };
     default:
       return state;

@@ -28,7 +28,7 @@ export const createDoubt = (doubt, history) => async (dispatch) => {
     dispatch({ type: "START_LOADING" });
     const { data } = await api.createDoubt(doubt);
 
-    dispatch({ type: "CREATE", payload: data });
+    dispatch({ type: "CREATE_DOUBT", payload: data });
 
     history.push(`/discussion/${data._id}`);
   } catch (error) {
@@ -40,7 +40,7 @@ export const updateDoubt = (id, doubt) => async (dispatch) => {
   try {
     const { data } = await api.updateDoubt(id, doubt);
 
-    dispatch({ type: "UPDATE", payload: data });
+    dispatch({ type: "UPDATE_DOUBT", payload: data });
   } catch (error) {
     console.log(error);
   }
@@ -64,7 +64,7 @@ export const deleteDoubt = (id) => async (dispatch) => {
   try {
     await await api.deleteDoubt(id);
 
-    dispatch({ type: "DELETE", payload: id });
+    dispatch({ type: "DELETE_DOUBT", payload: id });
   } catch (error) {
     console.log(error);
   }

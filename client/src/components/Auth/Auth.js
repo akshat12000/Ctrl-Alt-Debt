@@ -2,11 +2,17 @@ import React from "react";
 import { Button} from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom";
 
 const Auth = () => {
 
 
   const { t, i18n } = useTranslation();
+  // const history = useHistory();
+  // const info = JSON.parse(localStorage.getItem("profile"));
+  // if (info) {
+  //   history.push("/");
+  // }
 
 
   return (

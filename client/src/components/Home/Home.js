@@ -9,7 +9,6 @@ import LoginSnack from './LoginSnack';
 import TopVolunteers from '../VolunteerLeaderboard/TopVolunteers'
 import { useTranslation } from 'react-i18next';
 
-const info = JSON.parse(localStorage.getItem("profile"));
 
 const Home = () => {
     const classes = useStyles();
@@ -17,12 +16,14 @@ const Home = () => {
     const history = useHistory();
     const open = useSelector((state)=>state.open);
     const [ok,setOk]=useState(true);
+    const [info,setInfo]=useState(JSON.parse(localStorage.getItem("profile")));
 
     useEffect(()=>{
         if(!info){
             history.push("/auth");
         }
     },[info])
+    
     return (
         <div className={open?classes.root:null} style={{display:"flex",justifyContent:"space-around"}}>
         <div>

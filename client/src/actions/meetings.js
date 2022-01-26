@@ -6,7 +6,7 @@ export const getMeetings = (volunteerId) => async (dispatch) => {
     try {
         const { data } = await api.getMeetings(volunteerId);
         console.log(data);
-        dispatch({ type: "GET", payload: data });
+        dispatch({ type: "GET_MEETINGS", payload: data });
 
     } catch (error) {
         console.log(error);
