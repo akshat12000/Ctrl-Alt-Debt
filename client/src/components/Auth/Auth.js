@@ -62,11 +62,11 @@ const Auth = () => {
       >
         {t("Volunteer Login")}
       </Button>
-      <ThemeProvider >
+      {/* <ThemeProvider >
                 {/* <ColorButton component={Link} to="/admin" variant="contained" color="tertiary" size="large" style={{margin:"1%"}}>
                     {t("Admin Login")}
                 </ColorButton> */}
-      </ThemeProvider>
+      </ThemeProvider> */}
     </div>
   );
 };
