@@ -38,7 +38,7 @@ export const signin = async (req, res) => {
         res.status(200).json({ result: newUser, token,message:"first" ,language:"en"});
       }else if(getUser && getUser.date!==nDate){
         await dailyLogin.findOneAndUpdate({uId},{date:nDate,val:getUser.val});
-        const newUser = await student.findByIdAndUpdate(oldUser._id,{$inc:{dayCount:1}})
+        const newUser = await student.findByIdAndUpdate(oldUser._id,{$inc:{dayCount:5}})
         res.status(200).json({ result: newUser, token,message:"first",language:"en" });
       }else{
         res.status(200).json({ result: oldUser, token,message:"second",language:"en" });
@@ -107,7 +107,7 @@ export const signup = async (req, res) => {
         res.status(200).json({ result: newResult, token,message:"first",language:"en" });
       }else if(getUser && getUser.date!==nDate){
         await dailyLogin.findOneAndUpdate({uId},{date:nDate,val:getUser.val});
-        const newResult = await student.findByIdAndUpdate(result._id,{$inc:{dayCount:1}})
+        const newResult = await student.findByIdAndUpdate(result._id,{$inc:{dayCount:5}})
         res.status(200).json({ result: newResult, token,message:"first",language:"en" });
       }else{
         res.status(200).json({ result: result, token,message:"second",language:"en" });
