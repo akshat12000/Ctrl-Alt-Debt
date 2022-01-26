@@ -2,7 +2,7 @@
 
 ### Do check out these links:
 <a href="https://gyandaan-ctrl-alt-debt.netlify.app/">Hosted Website</a><br/>
-<a href="https://docs.google.com/presentation/d/1oMKAzZyZKIy0rnrO6dOiR34T1kbVa2w3765O3PbmqbM/edit#slide=id.g1108132feab_1_0">Presentation For Prototype Round</a>
+<a href="https://docs.google.com/presentation/d/1oMKAzZyZKIy0rnrO6dOiR34T1kbVa2w3765O3PbmqbM/edit#slide=id.g1108132feab_1_0">Presentation For Prototype Round</a><br/>
 <a href="https://youtu.be/afvhdMRwQGg">Link to our prototype demo</a>
 
 ## Problem Statement
