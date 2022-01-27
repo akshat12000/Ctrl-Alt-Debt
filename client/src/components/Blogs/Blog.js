@@ -52,6 +52,10 @@ function Blog({blog,id,name}) {
        dispatch(deleteBlogs(blog._id));
     }
 
+    if(!blog.creator){
+        window.location.reload()
+    }
+
     return (
         <div style={{margin:"5px",flexBasis:"20%"}}>
             <Card className={classes.card}>
